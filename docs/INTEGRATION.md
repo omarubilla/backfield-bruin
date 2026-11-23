@@ -27,6 +27,11 @@
 | **`GET /v1/public/athletes/{athleteId}/benchmark`** | evaluation payload; NFL Combine measurements/percentiles in full; `pffContext.redacted = true`, every PFF `distribution = null`, `playerSeasons = []`, `statusDetail` explains the redaction |
 | `GET /v1/public/benchmarks/{position}` | NFL Combine distributions for a position (nflverse public data) |
 | `GET /v1/public/pipeline/status` | Bruin run status, quality checks, providers, `dataQualityExceptions` |
+| `GET /v1/public/showcase` | public-safe Bruin sponsor showcase: status, stages, row counts, checks, lineage edges, QB distribution, example athlete, freshness, methodology |
+| `GET /v1/public/players/featured` | real combine athletes linked to PFF by provider id (ids + coverage) |
+
+**Athlete ids:** `bf-demo-qb-001` (synthetic demo QB) or `pfr:<pfr_id>` for any of the 1,288 real combine athletes linked to PFF
+(e.g. `pfr:CookBr03`, Brady Cook). Real-player sample: [`docs/evidence/real_player_demo_public.json`](evidence/real_player_demo_public.json).
 
 ### Private (Bearer token) — full licensed PFF context
 | Path | Returns |

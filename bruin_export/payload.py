@@ -73,7 +73,7 @@ PFF_LICENSE = {"provider": "Pro Football Focus (PFF)", "tier_required": "PFF Pro
                "redistribution": "not confirmed - aggregates and player context are served to internal consumers only"}
 
 
-def pff_context(athlete: dict, redact: bool = False) -> dict:
+def pff_context(athlete: dict, redact: bool = False, pff_player_id: str | None = None) -> dict:
     prov = _rows("SELECT status, detail FROM bronze.provider_status WHERE provider = 'pff'")
     status = prov[0]["status"] if prov else "unavailable"
     ctx = {
@@ -106,7 +106,7 @@ def pff_context(athlete: dict, redact: bool = False) -> dict:
         "distribution": None if redact else {k: r[k] for k in ("p10", "p25", "p50", "p75", "p90")},
         "sourceRef": f"bruin:gold.pff_position_grade_distributions/{r['league']}/{r['season']}/{r['position']}/{r['grade_metric']}",
     } for r in refs]
-    pid = athlete.get("pffPlayerId")
+    pid = pff_player_id
     if pid:
         ctx["athleteMatch"] = {"matched": True, "method": "provider_id", "pffPlayerId": pid, "reason": None}
         ctx["playerSeasons"] = [] if redact else pff_player(pid)
@@ -130,14 +130,32 @@ def pff_search(name: str, league: str | None = None, season: int | None = None, 
     return _rows(sql + " ORDER BY snaps_offense DESC NULLS LAST LIMIT ?", params + [limit])
 
 
+def featured_players(limit: int = 10) -> list[dict]:
+    """Real linked players with the most complete combine coverage (public-safe identifiers only)."""
+    return _rows("""SELECT athlete_id, any_value(display_name) AS display_name, any_value(position) AS position,
+        any_value(combine_season) AS combine_season, any_value(pff_player_id) AS pff_player_id,
+        count(*) FILTER (WHERE measured) AS metrics_measured, count(*) AS metrics_total
+        FROM gold.player_benchmark_results GROUP BY athlete_id
+        ORDER BY metrics_measured DESC, combine_season DESC, athlete_id LIMIT ?""", [limit])
+
+
 def list_athletes() -> list[str]:
     return [r["athlete_id"] for r in _rows("SELECT DISTINCT athlete_id FROM gold.athlete_benchmark_results ORDER BY 1")]
 
 
 def build(athlete_id: str, redact_pff: bool = False) -> dict | None:
     rows = _rows("SELECT * FROM gold.athlete_benchmark_results WHERE athlete_id = ? ORDER BY measured DESC, metric", [athlete_id])
-    if not rows:
-        return None
+    pff_id = None
+    if not rows:  # real NFL Combine athlete linked to PFF by provider id
+        rows = _rows("SELECT * FROM gold.player_benchmark_results WHERE athlete_id = ? ORDER BY measured DESC, metric", [athlete_id])
+        if not rows:
+            return None
+        r0 = rows[0]
+        pff_id = r0["pff_player_id"]
+        identity = (f"nflverse gsis {r0['gsis_id']} / pfr {r0['pfr_id']} <-> PFF {pff_id} via nflverse players.pff_id "
+                    f"(provider-id link, no name matching)")
+        for r in rows:
+            r["identity_provider"] = identity
     a = rows[0]
     status = pipeline_status()
     measurements = []
@@ -210,7 +228,7 @@ def build(athlete_id: str, redact_pff: bool = False) -> dict | None:
             {"id": "pff", "description": "Pro Football Focus Developer API (PFF Pro): NCAA/NFL stats, snaps and PFF grades",
              "url": "https://developer.pff.com/", "license": "PFF Pro - internal analysis only"},
         ],
-        "pffContext": pff_context(athlete, redact=redact_pff),
+        "pffContext": pff_context(athlete, redact=redact_pff, pff_player_id=pff_id),
         "pipeline": status,
     }
 

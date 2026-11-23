@@ -3,6 +3,8 @@
 Reproducible Bronze → Silver → Gold football analytics pipeline built with [Bruin](https://github.com/bruin-data/bruin) + DuckDB,
 publishing validated athlete benchmark results for the Backfield coaching agents.
 
+**Hackathon submission:** [BRUIN_PRIZE_SUBMISSION.md](BRUIN_PRIZE_SUBMISSION.md) · evidence in [docs/evidence/](docs/evidence)
+
 **Deployed API:** `https://omar-ubilla--backfield-bruin-api.us-east.modal.run` — see [docs/INTEGRATION.md](docs/INTEGRATION.md) (public vs. token-protected routes).
 
 **Integration contract:** [docs/BENCHMARK_EXPORT.md](docs/BENCHMARK_EXPORT.md) · schema [docs/athlete_benchmark.schema.json](docs/athlete_benchmark.schema.json) · sample [docs/sample_payload.json](docs/sample_payload.json)
@@ -16,7 +18,7 @@ uv run --python 3.12 --with duckdb --with pytest --with jsonschema python -m pyt
 ```
 Needs `uv` (Python 3.12 is fetched automatically). Secrets go in `.env` (git-ignored): `PFF_API_KEY=...` (PFF Pro) and optionally `CFBD_API_KEY=...`.
 
-## Pipeline (`pipeline/`, 25 assets, 74 quality checks)
+## Pipeline (`pipeline/`, 27 assets, 85 quality checks)
 | Layer | Asset | What |
 |---|---|---|
 | Bronze | `bronze.nfl_combine` | nflverse combine results 2000–2026 (nflreadpy) |
@@ -38,6 +40,8 @@ Needs `uv` (Python 3.12 is fetched automatically). Secrets go in `.env` (git-ign
 | | `gold.athlete_benchmark_results` | **integration contract table** behind the JSON export |
 | | `gold.qb_physical_comparables` | descriptive nearest combine QBs, NFL stats joined by provider id |
 | | `gold.pff_position_grade_distributions` | PFF grade distributions within position/league/season (qualified players) |
+| | `gold.player_benchmark_results` | real combine athletes linked to PFF by provider id, same contract as the export |
+| | `gold.lineage_row_counts` | row counts per stage, computed in-run (showcase/evidence) |
 | | `gold.pff_player_context` | PFF player lookup with within-position grade percentiles and identity links |
 | | `gold.ncaa_qb_context` | CFBD context (empty with status when unavailable) |
 | | `gold.pipeline_quality` | row counts, missing ids, implausible values, freshness |

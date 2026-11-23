@@ -1,0 +1,564 @@
+{
+  "assets": {
+    "bronze.pff_offense_summary": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/pff_offense_summary.py"
+    },
+    "bronze.nfl_player_stats": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/nfl_player_stats.py"
+    },
+    "bronze.backfield_athlete_records": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/backfield_athletes.py"
+    },
+    "bronze.nfl_players": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/nfl_players.py"
+    },
+    "bronze.pff_passing_summary": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/pff_passing_summary.py"
+    },
+    "bronze.provider_status": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/provider_status.py"
+    },
+    "bronze.nfl_combine": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/nfl_combine.py"
+    },
+    "bronze.pff_receiving_summary": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/pff_receiving_summary.py"
+    },
+    "bronze.pff_ncaa_rosters": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/pff_ncaa_rosters.py"
+    },
+    "bronze.cfbd_player_season_passing": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/cfbd_qb_context.py"
+    },
+    "bronze.pff_rushing_summary": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/pff_rushing_summary.py"
+    },
+    "silver.nfl_qb_season_stats": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "bronze.nfl_player_stats"
+      ],
+      "file": "pipeline/assets/silver/qb_season_stats.sql"
+    },
+    "silver.athlete_identity_xref": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "silver.pff_player_seasons",
+        "bronze.nfl_players",
+        "silver.athletes",
+        "bronze.cfbd_player_season_passing"
+      ],
+      "file": "pipeline/assets/silver/athlete_identity_xref.sql"
+    },
+    "silver.pff_grades": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "silver.pff_player_seasons"
+      ],
+      "file": "pipeline/assets/silver/pff_grades.sql"
+    },
+    "silver.athletes": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "bronze.nfl_combine"
+      ],
+      "file": "pipeline/assets/silver/athletes.sql"
+    },
+    "silver.pff_player_seasons": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "bronze.pff_passing_summary",
+        "bronze.pff_rushing_summary",
+        "bronze.pff_receiving_summary",
+        "bronze.pff_offense_summary"
+      ],
+      "file": "pipeline/assets/silver/pff_player_seasons.sql"
+    },
+    "silver.physical_measurements": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "silver.athletes",
+        "bronze.nfl_combine"
+      ],
+      "file": "pipeline/assets/silver/physical_measurements.sql"
+    },
+    "gold.pipeline_quality": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "bronze.nfl_combine",
+        "bronze.nfl_players",
+        "bronze.nfl_player_stats",
+        "bronze.provider_status",
+        "silver.physical_measurements",
+        "silver.athletes",
+        "silver.nfl_qb_season_stats",
+        "gold.combine_benchmarks",
+        "gold.athlete_evidence",
+        "gold.ncaa_qb_context",
+        "silver.pff_player_seasons",
+        "silver.athlete_identity_xref",
+        "bronze.pff_ncaa_rosters"
+      ],
+      "file": "pipeline/assets/gold/pipeline_quality.sql"
+    },
+    "gold.pff_player_context": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "silver.pff_player_seasons",
+        "silver.pff_grades",
+        "silver.athlete_identity_xref"
+      ],
+      "file": "pipeline/assets/gold/pff_player_context.sql"
+    },
+    "gold.player_benchmark_results": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "silver.athlete_identity_xref",
+        "silver.athletes",
+        "silver.physical_measurements",
+        "gold.combine_benchmarks"
+      ],
+      "file": "pipeline/assets/gold/player_benchmark_results.sql"
+    },
+    "gold.ncaa_qb_context": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "bronze.cfbd_player_season_passing"
+      ],
+      "file": "pipeline/assets/gold/ncaa_context.sql"
+    },
+    "gold.qb_physical_comparables": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "gold.athlete_evidence",
+        "gold.combine_benchmarks",
+        "silver.physical_measurements",
+        "silver.athletes",
+        "silver.nfl_qb_season_stats",
+        "bronze.nfl_players"
+      ],
+      "file": "pipeline/assets/gold/qb_comparables.sql"
+    },
+    "gold.combine_benchmarks": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "silver.physical_measurements",
+        "silver.athletes"
+      ],
+      "file": "pipeline/assets/gold/combine_benchmarks.sql"
+    },
+    "gold.athlete_evidence": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "bronze.backfield_athlete_records",
+        "silver.physical_measurements",
+        "silver.athletes",
+        "gold.combine_benchmarks"
+      ],
+      "file": "pipeline/assets/gold/athlete_evidence.sql"
+    },
+    "gold.pff_position_grade_distributions": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "silver.pff_grades"
+      ],
+      "file": "pipeline/assets/gold/pff_position_grade_distributions.sql"
+    },
+    "gold.lineage_row_counts": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "bronze.nfl_combine",
+        "bronze.nfl_players",
+        "bronze.nfl_player_stats",
+        "bronze.cfbd_player_season_passing",
+        "bronze.backfield_athlete_records",
+        "bronze.provider_status",
+        "bronze.pff_passing_summary",
+        "bronze.pff_rushing_summary",
+        "bronze.pff_receiving_summary",
+        "bronze.pff_offense_summary",
+        "bronze.pff_ncaa_rosters",
+        "silver.athletes",
+        "silver.physical_measurements",
+        "silver.nfl_qb_season_stats",
+        "silver.pff_player_seasons",
+        "silver.pff_grades",
+        "silver.athlete_identity_xref",
+        "gold.combine_benchmarks",
+        "gold.athlete_evidence",
+        "gold.athlete_benchmark_results",
+        "gold.player_benchmark_results",
+        "gold.pff_position_grade_distributions",
+        "gold.pff_player_context",
+        "gold.qb_physical_comparables",
+        "gold.ncaa_qb_context"
+      ],
+      "file": "pipeline/assets/gold/lineage_row_counts.sql"
+    },
+    "gold.athlete_benchmark_results": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "bronze.backfield_athlete_records",
+        "silver.physical_measurements",
+        "silver.athletes",
+        "gold.combine_benchmarks"
+      ],
+      "file": "pipeline/assets/gold/athlete_benchmark_results.sql"
+    }
+  },
+  "edges": [
+    {
+      "from": "bronze.nfl_player_stats",
+      "to": "silver.nfl_qb_season_stats"
+    },
+    {
+      "from": "silver.pff_player_seasons",
+      "to": "silver.athlete_identity_xref"
+    },
+    {
+      "from": "bronze.nfl_players",
+      "to": "silver.athlete_identity_xref"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "silver.athlete_identity_xref"
+    },
+    {
+      "from": "bronze.cfbd_player_season_passing",
+      "to": "silver.athlete_identity_xref"
+    },
+    {
+      "from": "silver.pff_player_seasons",
+      "to": "silver.pff_grades"
+    },
+    {
+      "from": "bronze.nfl_combine",
+      "to": "silver.athletes"
+    },
+    {
+      "from": "bronze.pff_passing_summary",
+      "to": "silver.pff_player_seasons"
+    },
+    {
+      "from": "bronze.pff_rushing_summary",
+      "to": "silver.pff_player_seasons"
+    },
+    {
+      "from": "bronze.pff_receiving_summary",
+      "to": "silver.pff_player_seasons"
+    },
+    {
+      "from": "bronze.pff_offense_summary",
+      "to": "silver.pff_player_seasons"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "silver.physical_measurements"
+    },
+    {
+      "from": "bronze.nfl_combine",
+      "to": "silver.physical_measurements"
+    },
+    {
+      "from": "bronze.nfl_combine",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "bronze.nfl_players",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "bronze.nfl_player_stats",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "bronze.provider_status",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "silver.nfl_qb_season_stats",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "gold.athlete_evidence",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "gold.ncaa_qb_context",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "silver.pff_player_seasons",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "silver.athlete_identity_xref",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "bronze.pff_ncaa_rosters",
+      "to": "gold.pipeline_quality"
+    },
+    {
+      "from": "silver.pff_player_seasons",
+      "to": "gold.pff_player_context"
+    },
+    {
+      "from": "silver.pff_grades",
+      "to": "gold.pff_player_context"
+    },
+    {
+      "from": "silver.athlete_identity_xref",
+      "to": "gold.pff_player_context"
+    },
+    {
+      "from": "silver.athlete_identity_xref",
+      "to": "gold.player_benchmark_results"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.player_benchmark_results"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.player_benchmark_results"
+    },
+    {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.player_benchmark_results"
+    },
+    {
+      "from": "bronze.cfbd_player_season_passing",
+      "to": "gold.ncaa_qb_context"
+    },
+    {
+      "from": "gold.athlete_evidence",
+      "to": "gold.qb_physical_comparables"
+    },
+    {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.qb_physical_comparables"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.qb_physical_comparables"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.qb_physical_comparables"
+    },
+    {
+      "from": "silver.nfl_qb_season_stats",
+      "to": "gold.qb_physical_comparables"
+    },
+    {
+      "from": "bronze.nfl_players",
+      "to": "gold.qb_physical_comparables"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.combine_benchmarks"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.combine_benchmarks"
+    },
+    {
+      "from": "bronze.backfield_athlete_records",
+      "to": "gold.athlete_evidence"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.athlete_evidence"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.athlete_evidence"
+    },
+    {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.athlete_evidence"
+    },
+    {
+      "from": "silver.pff_grades",
+      "to": "gold.pff_position_grade_distributions"
+    },
+    {
+      "from": "bronze.nfl_combine",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.nfl_players",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.nfl_player_stats",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.cfbd_player_season_passing",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.backfield_athlete_records",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.provider_status",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.pff_passing_summary",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.pff_rushing_summary",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.pff_receiving_summary",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.pff_offense_summary",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.pff_ncaa_rosters",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.nfl_qb_season_stats",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.pff_player_seasons",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.pff_grades",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.athlete_identity_xref",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.athlete_evidence",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.athlete_benchmark_results",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.player_benchmark_results",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.pff_position_grade_distributions",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.pff_player_context",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.qb_physical_comparables",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.ncaa_qb_context",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.backfield_athlete_records",
+      "to": "gold.athlete_benchmark_results"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.athlete_benchmark_results"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.athlete_benchmark_results"
+    },
+    {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.athlete_benchmark_results"
+    }
+  ]
+}

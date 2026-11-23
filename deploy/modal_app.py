@@ -13,13 +13,14 @@ image = (
     modal.Image.debian_slim(python_version="3.12")
     .pip_install("fastapi[standard]==0.115.6", "duckdb==2.0.1")
     .env({"BRUIN_DUCKDB": "/app/data/serving.duckdb", "BRUIN_RUN_STATUS": "/app/logs/bruin_run_latest.json",
-          "BRUIN_SCHEMA": "/app/docs/athlete_benchmark.schema.json", "PYTHONPATH": "/app"})
+          "BRUIN_SCHEMA": "/app/docs/athlete_benchmark.schema.json", "BRUIN_LINEAGE": "/app/docs/evidence/lineage.json", "PYTHONPATH": "/app"})
     .add_local_dir("bruin_export", "/app/bruin_export", ignore=["__pycache__"])
     .add_local_file("api/serving_api.py", "/app/api/serving_api.py")
     .add_local_file("api/__init__.py", "/app/api/__init__.py")
     .add_local_file("data/serving.duckdb", "/app/data/serving.duckdb")
     .add_local_file("logs/bruin_run_latest.json", "/app/logs/bruin_run_latest.json")
     .add_local_file("docs/athlete_benchmark.schema.json", "/app/docs/athlete_benchmark.schema.json")
+    .add_local_file("docs/evidence/lineage.json", "/app/docs/evidence/lineage.json")
 )
 
 app = modal.App("backfield-bruin-api", image=image)

@@ -1,0 +1,85 @@
+flowchart LR
+  subgraph BRONZE
+    bronze_backfield_athlete_records["bronze.backfield_athlete_records"]
+    bronze_cfbd_player_season_passing["bronze.cfbd_player_season_passing"]
+    bronze_nfl_combine["bronze.nfl_combine"]
+    bronze_nfl_player_stats["bronze.nfl_player_stats"]
+    bronze_nfl_players["bronze.nfl_players"]
+    bronze_pff_ncaa_rosters["bronze.pff_ncaa_rosters"]
+    bronze_pff_offense_summary["bronze.pff_offense_summary"]
+    bronze_pff_passing_summary["bronze.pff_passing_summary"]
+    bronze_pff_receiving_summary["bronze.pff_receiving_summary"]
+    bronze_pff_rushing_summary["bronze.pff_rushing_summary"]
+    bronze_provider_status["bronze.provider_status"]
+  end
+  subgraph SILVER
+    silver_athlete_identity_xref["silver.athlete_identity_xref"]
+    silver_athletes["silver.athletes"]
+    silver_nfl_qb_season_stats["silver.nfl_qb_season_stats"]
+    silver_pff_grades["silver.pff_grades"]
+    silver_pff_player_seasons["silver.pff_player_seasons"]
+    silver_physical_measurements["silver.physical_measurements"]
+  end
+  subgraph GOLD
+    gold_athlete_benchmark_results["gold.athlete_benchmark_results"]
+    gold_athlete_evidence["gold.athlete_evidence"]
+    gold_combine_benchmarks["gold.combine_benchmarks"]
+    gold_lineage_row_counts["gold.lineage_row_counts"]
+    gold_ncaa_qb_context["gold.ncaa_qb_context"]
+    gold_pff_player_context["gold.pff_player_context"]
+    gold_pff_position_grade_distributions["gold.pff_position_grade_distributions"]
+    gold_pipeline_quality["gold.pipeline_quality"]
+    gold_player_benchmark_results["gold.player_benchmark_results"]
+    gold_qb_physical_comparables["gold.qb_physical_comparables"]
+  end
+  bronze_nfl_player_stats --> silver_nfl_qb_season_stats
+  silver_pff_player_seasons --> silver_athlete_identity_xref
+  bronze_nfl_players --> silver_athlete_identity_xref
+  silver_athletes --> silver_athlete_identity_xref
+  bronze_cfbd_player_season_passing --> silver_athlete_identity_xref
+  silver_pff_player_seasons --> silver_pff_grades
+  bronze_nfl_combine --> silver_athletes
+  bronze_pff_passing_summary --> silver_pff_player_seasons
+  bronze_pff_rushing_summary --> silver_pff_player_seasons
+  bronze_pff_receiving_summary --> silver_pff_player_seasons
+  bronze_pff_offense_summary --> silver_pff_player_seasons
+  silver_athletes --> silver_physical_measurements
+  bronze_nfl_combine --> silver_physical_measurements
+  bronze_nfl_combine --> gold_pipeline_quality
+  bronze_nfl_players --> gold_pipeline_quality
+  bronze_nfl_player_stats --> gold_pipeline_quality
+  bronze_provider_status --> gold_pipeline_quality
+  silver_physical_measurements --> gold_pipeline_quality
+  silver_athletes --> gold_pipeline_quality
+  silver_nfl_qb_season_stats --> gold_pipeline_quality
+  gold_combine_benchmarks --> gold_pipeline_quality
+  gold_athlete_evidence --> gold_pipeline_quality
+  gold_ncaa_qb_context --> gold_pipeline_quality
+  silver_pff_player_seasons --> gold_pipeline_quality
+  silver_athlete_identity_xref --> gold_pipeline_quality
+  bronze_pff_ncaa_rosters --> gold_pipeline_quality
+  silver_pff_player_seasons --> gold_pff_player_context
+  silver_pff_grades --> gold_pff_player_context
+  silver_athlete_identity_xref --> gold_pff_player_context
+  silver_athlete_identity_xref --> gold_player_benchmark_results
+  silver_athletes --> gold_player_benchmark_results
+  silver_physical_measurements --> gold_player_benchmark_results
+  gold_combine_benchmarks --> gold_player_benchmark_results
+  bronze_cfbd_player_season_passing --> gold_ncaa_qb_context
+  gold_athlete_evidence --> gold_qb_physical_comparables
+  gold_combine_benchmarks --> gold_qb_physical_comparables
+  silver_physical_measurements --> gold_qb_physical_comparables
+  silver_athletes --> gold_qb_physical_comparables
+  silver_nfl_qb_season_stats --> gold_qb_physical_comparables
+  bronze_nfl_players --> gold_qb_physical_comparables
+  silver_physical_measurements --> gold_combine_benchmarks
+  silver_athletes --> gold_combine_benchmarks
+  bronze_backfield_athlete_records --> gold_athlete_evidence
+  silver_physical_measurements --> gold_athlete_evidence
+  silver_athletes --> gold_athlete_evidence
+  gold_combine_benchmarks --> gold_athlete_evidence
+  silver_pff_grades --> gold_pff_position_grade_distributions
+  bronze_backfield_athlete_records --> gold_athlete_benchmark_results
+  silver_physical_measurements --> gold_athlete_benchmark_results
+  silver_athletes --> gold_athlete_benchmark_results
+  gold_combine_benchmarks --> gold_athlete_benchmark_results

@@ -1,0 +1,26 @@
+
+Lineage: 'gold.player_benchmark_results'
+
+Upstream Dependencies
+========================
+- silver.athlete_identity_xref (assets/silver/athlete_identity_xref.sql)
+- silver.pff_player_seasons (assets/silver/pff_player_seasons.sql)
+- bronze.pff_passing_summary (assets/bronze/pff_passing_summary.py)
+- bronze.pff_rushing_summary (assets/bronze/pff_rushing_summary.py)
+- bronze.pff_receiving_summary (assets/bronze/pff_receiving_summary.py)
+- bronze.pff_offense_summary (assets/bronze/pff_offense_summary.py)
+- bronze.nfl_players (assets/bronze/nfl_players.py)
+- silver.athletes (assets/silver/athletes.sql)
+- bronze.nfl_combine (assets/bronze/nfl_combine.py)
+- bronze.cfbd_player_season_passing (assets/bronze/cfbd_qb_context.py)
+- silver.physical_measurements (assets/silver/physical_measurements.sql)
+- gold.combine_benchmarks (assets/gold/combine_benchmarks.sql)
+
+Total: 12
+
+
+Downstream Dependencies
+========================
+- gold.lineage_row_counts (assets/gold/lineage_row_counts.sql)
+
+Total: 1

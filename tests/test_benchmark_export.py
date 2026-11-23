@@ -111,3 +111,33 @@ def test_pff_player_lookup_links_by_provider_id():
     rows = P.pff_search("Joe Burrow", league="nfl", season=2025)
     assert rows and rows[0]["identity_match_type"] == "provider_id_nflverse_pff_id" and rows[0]["pfr_id"] == "BurrJo01"
     assert rows[0]["grade_source"] == "PFF"
+
+
+# --- real linked player (gold.player_benchmark_results) ---
+
+REAL = "pfr:CookBr03"
+
+
+def test_real_player_payload_valid_and_linked_by_provider_id():
+    d = P.build(REAL)
+    jsonschema.Draft202012Validator(SCHEMA).validate(json.loads(json.dumps(d, default=str)))
+    assert d["athlete"]["isSynthetic"] is False and d["athlete"]["position"] == "QB"
+    assert "players.pff_id" in d["athlete"]["identityProvider"] and "00-0040398" in d["athlete"]["identityProvider"]
+    m = d["pffContext"]["athleteMatch"]
+    assert m["matched"] and m["method"] == "provider_id" and m["pffPlayerId"] == "124199"
+    assert {(s["league"], s["season"]) for s in d["pffContext"]["playerSeasons"]} >= {("ncaa", 2024), ("nfl", 2025)}
+
+
+def test_real_player_combine_values_are_published_and_not_imputed():
+    m = by_metric(P.build(REAL))
+    assert m["forty_sec"]["value"] == 4.59 and m["forty_sec"]["source"]["provider"] == "nflverse"
+    assert m["bench_reps"]["measured"] is False and m["bench_reps"]["percentile"] is None
+    assert m["bench_reps"]["percentile_status"] == "not_measured"
+    # player is excluded from his own cohort: percentile denominator is cohort n - 1
+    assert 85 < m["forty_sec"]["percentile"] < 92
+
+
+def test_real_player_redacted_public_version():
+    d = P.build(REAL, redact_pff=True)
+    assert d["pffContext"]["playerSeasons"] == [] and d["pffContext"]["redacted"] is True
+    assert all(r["distribution"] is None for r in d["pffContext"]["positionReference"])
