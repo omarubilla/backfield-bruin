@@ -1,0 +1,4 @@
+name: backfield_scouting_combine
+catchup: false
+default_connections:
+  duckdb: duckdb-default

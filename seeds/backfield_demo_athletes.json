@@ -1,0 +1,24 @@
+{
+  "provider": "backfield-demo (synthetic)",
+  "license_category": "synthetic-demo (not a real athlete)",
+  "note": "Synthetic demo athlete for the hackathon scenario. Not a real person; never used as a reference cohort.",
+  "athletes": [
+    {
+      "athlete_id": "bf-demo-qb-001",
+      "display_name": "Demo QB 'Jordan Avery' (synthetic)",
+      "position": "QB",
+      "level": "HS-Senior",
+      "grad_year": 2027,
+      "is_synthetic": true,
+      "measurements": [
+        {"metric": "height_in", "value": 74.0, "unit": "in", "observed_on": "2026-11-01", "capture_method": "self-reported", "confidence": "low", "source_record_id": "bf-demo-qb-001/m/ht"},
+        {"metric": "weight_lb", "value": 203.0, "unit": "lb", "observed_on": "2026-11-01", "capture_method": "self-reported", "confidence": "low", "source_record_id": "bf-demo-qb-001/m/wt"},
+        {"metric": "forty_sec", "value": 4.82, "unit": "s", "observed_on": "2026-11-15", "capture_method": "hand-timed (coach stopwatch)", "confidence": "low", "source_record_id": "bf-demo-qb-001/m/forty", "notes": "Hand times typically read faster than electronic combine times."},
+        {"metric": "ten_yd_split_sec", "value": 1.66, "unit": "s", "observed_on": "2026-11-22", "capture_method": "Backfield AR 10-yard dash (iPhone ARKit + Vision), uncalibrated", "confidence": "medium", "source_record_id": "bf-demo-qb-001/m/ar10", "notes": "No 10-yard split exists in the nflverse combine source, so there is no reference cohort."},
+        {"metric": "vertical_in", "value": 30.5, "unit": "in", "observed_on": "2026-11-15", "capture_method": "Vertec at team workout", "confidence": "medium", "source_record_id": "bf-demo-qb-001/m/vert"},
+        {"metric": "broad_jump_in", "value": 112.0, "unit": "in", "observed_on": "2026-11-15", "capture_method": "tape measure at team workout", "confidence": "medium", "source_record_id": "bf-demo-qb-001/m/broad"},
+        {"metric": "shuttle_sec", "value": 4.41, "unit": "s", "observed_on": "2026-11-15", "capture_method": "hand-timed (coach stopwatch)", "confidence": "low", "source_record_id": "bf-demo-qb-001/m/shuttle"}
+      ]
+    }
+  ]
+}

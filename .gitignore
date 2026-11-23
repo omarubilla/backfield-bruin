@@ -1,0 +1,17 @@
+data/*.duckdb
+data/*.duckdb.wal
+.env
+.env.*
+node_modules/
+dist/
+__pycache__/
+.venv/
+logs/
+server/uploads/
+*.pyc
+.DS_Store
+
+.bruin.yml
+logs/runs
+logs/*.log
+*.py[cod]
