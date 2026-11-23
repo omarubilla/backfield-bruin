@@ -1,0 +1,500 @@
+{
+  "schemaVersion": "1.0.0",
+  "evaluationId": "bfe-bf-demo-qb-001-479f8bd818ed",
+  "generatedAt": "2026-11-23T20:49:13+00:00",
+  "athlete": {
+    "athleteId": "bf-demo-qb-001",
+    "displayName": "Demo QB 'Jordan Avery' (synthetic)",
+    "position": "QB",
+    "level": "HS-Senior",
+    "gradYear": 2027,
+    "isSynthetic": true,
+    "identityProvider": "backfield-demo (synthetic)"
+  },
+  "measurements": [
+    {
+      "metric": "broad_jump_in",
+      "definition": "Standing broad jump",
+      "value": 112.0,
+      "unit": "in",
+      "lower_is_better": false,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/broad",
+        "capture_method": "tape measure at team workout",
+        "capture_confidence": "medium",
+        "observed_on": "2026-11-15",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": null
+      },
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 363,
+        "missing_in_cohort": 113,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 103.0,
+          "p25": 107.0,
+          "p50": 111.0,
+          "p75": 116.0,
+          "p90": 120.8
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/broad_jump_in"
+      },
+      "percentile": 50.1,
+      "percentile_status": "calculated",
+      "comparability": "comparable",
+      "comparability_note": null,
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": false,
+        "percentile_withheld": false,
+        "reason": null
+      }
+    },
+    {
+      "metric": "forty_sec",
+      "definition": "40-yard dash time",
+      "value": 4.82,
+      "unit": "s",
+      "lower_is_better": true,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/forty",
+        "capture_method": "hand-timed (coach stopwatch)",
+        "capture_confidence": "low",
+        "observed_on": "2026-11-15",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": "Hand times typically read faster than electronic combine times."
+      },
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 413,
+        "missing_in_cohort": 63,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 4.59,
+          "p25": 4.69,
+          "p50": 4.81,
+          "p75": 4.92,
+          "p90": 5.038
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/forty_sec"
+      },
+      "percentile": 46.7,
+      "percentile_status": "calculated",
+      "comparability": "caveat",
+      "comparability_note": "Hand timing usually reads faster than electronic combine timing; percentile is optimistic.",
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": false,
+        "percentile_withheld": false,
+        "reason": null
+      }
+    },
+    {
+      "metric": "height_in",
+      "definition": "Standing height",
+      "value": 74.0,
+      "unit": "in",
+      "lower_is_better": false,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/ht",
+        "capture_method": "self-reported",
+        "capture_confidence": "low",
+        "observed_on": "2026-11-01",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": null
+      },
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 475,
+        "missing_in_cohort": 1,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 72.0,
+          "p25": 74.0,
+          "p50": 75.0,
+          "p75": 76.0,
+          "p90": 77.0
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/height_in"
+      },
+      "percentile": 21.9,
+      "percentile_status": "calculated",
+      "comparability": "caveat",
+      "comparability_note": "Self-reported value; verify with a measured value.",
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": false,
+        "percentile_withheld": false,
+        "reason": null
+      }
+    },
+    {
+      "metric": "shuttle_sec",
+      "definition": "20-yard (5-10-5) shuttle",
+      "value": 4.41,
+      "unit": "s",
+      "lower_is_better": true,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/shuttle",
+        "capture_method": "hand-timed (coach stopwatch)",
+        "capture_confidence": "low",
+        "observed_on": "2026-11-15",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": null
+      },
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 339,
+        "missing_in_cohort": 137,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 4.11,
+          "p25": 4.2,
+          "p50": 4.33,
+          "p75": 4.445,
+          "p90": 4.53
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/shuttle_sec"
+      },
+      "percentile": 31.0,
+      "percentile_status": "calculated",
+      "comparability": "caveat",
+      "comparability_note": "Hand timing usually reads faster than electronic combine timing; percentile is optimistic.",
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": false,
+        "percentile_withheld": false,
+        "reason": null
+      }
+    },
+    {
+      "metric": "ten_yd_split_sec",
+      "definition": "10-yard split (first 10 yards of a sprint)",
+      "value": 1.66,
+      "unit": "s",
+      "lower_is_better": true,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/ar10",
+        "capture_method": "Backfield AR 10-yard dash (iPhone ARKit + Vision), uncalibrated",
+        "capture_confidence": "medium",
+        "observed_on": "2026-11-22",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": "No 10-yard split exists in the nflverse combine source, so there is no reference cohort."
+      },
+      "benchmark": null,
+      "percentile": null,
+      "percentile_status": "no_reference_cohort",
+      "comparability": null,
+      "comparability_note": "Uncalibrated capture; treat as an estimate.",
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": true,
+        "percentile_withheld": true,
+        "reason": "The nflverse combine source has no cohort for this metric; no percentile is calculated or imputed."
+      }
+    },
+    {
+      "metric": "vertical_in",
+      "definition": "Vertical jump",
+      "value": 30.5,
+      "unit": "in",
+      "lower_is_better": false,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/vert",
+        "capture_method": "Vertec at team workout",
+        "capture_confidence": "medium",
+        "observed_on": "2026-11-15",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": null
+      },
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 362,
+        "missing_in_cohort": 114,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 27.0,
+          "p25": 29.0,
+          "p50": 31.0,
+          "p75": 33.5,
+          "p90": 35.5
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/vertical_in"
+      },
+      "percentile": 37.0,
+      "percentile_status": "calculated",
+      "comparability": "comparable",
+      "comparability_note": null,
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": false,
+        "percentile_withheld": false,
+        "reason": null
+      }
+    },
+    {
+      "metric": "weight_lb",
+      "definition": "Body weight",
+      "value": 203.0,
+      "unit": "lb",
+      "lower_is_better": false,
+      "measured": true,
+      "source": {
+        "provider": "backfield-demo (synthetic)",
+        "record_id": "bf-demo-qb-001/m/wt",
+        "capture_method": "self-reported",
+        "capture_confidence": "low",
+        "observed_on": "2026-11-01",
+        "license_category": "synthetic-demo (not a real athlete)",
+        "notes": null
+      },
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 475,
+        "missing_in_cohort": 1,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 207.0,
+          "p25": 214.0,
+          "p50": 221.0,
+          "p75": 229.0,
+          "p90": 235.0
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/weight_lb"
+      },
+      "percentile": 4.0,
+      "percentile_status": "calculated",
+      "comparability": "caveat",
+      "comparability_note": "Self-reported value; verify with a measured value.",
+      "missing": {
+        "value_missing": false,
+        "cohort_missing": false,
+        "percentile_withheld": false,
+        "reason": null
+      }
+    },
+    {
+      "metric": "bench_reps",
+      "definition": "225 lb bench press repetitions",
+      "value": null,
+      "unit": "reps",
+      "lower_is_better": false,
+      "measured": false,
+      "source": null,
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 20,
+        "missing_in_cohort": 456,
+        "seasons": {
+          "from": 2005,
+          "to": 2021
+        },
+        "distribution": {
+          "p10": 14.0,
+          "p25": 16.0,
+          "p50": 19.5,
+          "p75": 22.0,
+          "p90": 24.1
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/bench_reps"
+      },
+      "percentile": null,
+      "percentile_status": "not_measured",
+      "comparability": null,
+      "comparability_note": null,
+      "missing": {
+        "value_missing": true,
+        "cohort_missing": false,
+        "percentile_withheld": true,
+        "reason": "Athlete has no recorded value for this metric."
+      }
+    },
+    {
+      "metric": "cone_sec",
+      "definition": "3-cone drill",
+      "value": null,
+      "unit": "s",
+      "lower_is_better": true,
+      "measured": false,
+      "source": null,
+      "benchmark": {
+        "cohort": "NFL Combine invitees, QB",
+        "position_group": "QB",
+        "reference_population": "combine invitees with measured, plausible values",
+        "sample_size": 333,
+        "missing_in_cohort": 143,
+        "seasons": {
+          "from": 2000,
+          "to": 2026
+        },
+        "distribution": {
+          "p10": 6.85,
+          "p25": 6.98,
+          "p50": 7.13,
+          "p75": 7.29,
+          "p90": 7.46
+        },
+        "source": "nflverse combine",
+        "source_ref": "bruin:gold.combine_benchmarks/QB/cone_sec"
+      },
+      "percentile": null,
+      "percentile_status": "not_measured",
+      "comparability": null,
+      "comparability_note": null,
+      "missing": {
+        "value_missing": true,
+        "cohort_missing": false,
+        "percentile_withheld": true,
+        "reason": "Athlete has no recorded value for this metric."
+      }
+    }
+  ],
+  "summary": {
+    "metrics_total": 9,
+    "metrics_measured": 7,
+    "percentiles_calculated": 6,
+    "percentiles_with_caveat": 4,
+    "missing_values": [
+      "bench_reps",
+      "cone_sec"
+    ],
+    "missing_cohorts": [
+      "ten_yd_split_sec"
+    ]
+  },
+  "interpretation": "Percentiles are descriptive comparisons with NFL Combine invitees at the same position (share of the cohort the athlete beats, direction-aware). They are not grades or projections.",
+  "sourceReferences": [
+    {
+      "id": "nflverse-combine",
+      "description": "NFL Scouting Combine results via nflreadpy.load_combine",
+      "url": "https://github.com/nflverse/nflverse-data/releases/tag/combine",
+      "license": "nflverse open data (attribution)"
+    },
+    {
+      "id": "bruin-gold",
+      "description": "Bruin gold tables gold.athlete_benchmark_results, gold.combine_benchmarks",
+      "url": "https://github.com/bruin-data/bruin"
+    },
+    {
+      "id": "backfield-demo (synthetic)",
+      "description": "Backfield athlete records (synthetic demo data in this build)"
+    }
+  ],
+  "pipeline": {
+    "status": "succeeded",
+    "validated": true,
+    "tool": "bruin",
+    "bruin_version": "Current: v0.11.832 (3590ddcdf90425e609ceb8e0e2c352fb4de995b6)",
+    "pipeline": "backfield_scouting_combine",
+    "git_commit": "06131cf",
+    "started_at": "2026-11-23T20:48:17Z",
+    "finished_at": "2026-11-23T20:48:23Z",
+    "exit_code": 1,
+    "assets": {
+      "total": 15,
+      "passed": 15
+    },
+    "quality_checks": {
+      "passed": 48,
+      "failed": 1,
+      "failed_blocking": 0,
+      "failures": [
+        {
+          "asset": "bronze.nfl_player_stats",
+          "check": "player_id.not_null - column 'player_id' has 130 null values",
+          "blocking": false
+        }
+      ]
+    },
+    "providers": [
+      {
+        "provider": "backfield-demo",
+        "status": "synthetic",
+        "detail": "seeds/backfield_demo_athletes.json (synthetic demo athlete)",
+        "license_category": "synthetic-demo"
+      },
+      {
+        "provider": "collegefootballdata",
+        "status": "unavailable",
+        "detail": "CFBD_API_KEY not set (free key: collegefootballdata.com/key)",
+        "license_category": "CFBD API terms (free tier, rate limited)"
+      },
+      {
+        "provider": "hudl",
+        "status": "interface_only",
+        "detail": "attribution URL only; athlete uploads the clip directly",
+        "license_category": "restricted"
+      },
+      {
+        "provider": "maxpreps",
+        "status": "interface_only",
+        "detail": "no authorised API access; not scraped",
+        "license_category": "restricted"
+      },
+      {
+        "provider": "nflverse",
+        "status": "available",
+        "detail": "public nflverse releases via nflreadpy",
+        "license_category": "public-open-data (attribution)"
+      },
+      {
+        "provider": "pff",
+        "status": "unavailable",
+        "detail": "PFF_API_KEY not configured; PFF grades are never invented or scraped",
+        "license_category": "commercial licence required"
+      }
+    ]
+  }
+}

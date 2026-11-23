@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://backfield.ai/schemas/athlete_benchmark/1.0.0",
+  "title": "Backfield athlete benchmark evaluation (Bruin export)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "evaluationId", "generatedAt", "athlete", "measurements", "summary", "interpretation", "sourceReferences", "pipeline"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "evaluationId": { "type": "string", "pattern": "^bfe-.+-[0-9a-f]{12}$", "description": "Deterministic: same athlete + same validated data + same pipeline run => same id." },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "athlete": {
+      "type": "object", "additionalProperties": false,
+      "required": ["athleteId", "displayName", "position", "level", "gradYear", "isSynthetic", "identityProvider"],
+      "properties": {
+        "athleteId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "position": { "type": "string" },
+        "level": { "type": ["string", "null"] },
+        "gradYear": { "type": ["integer", "null"] },
+        "isSynthetic": { "type": "boolean", "description": "true for demo records; never real athlete data" },
+        "identityProvider": { "type": "string" }
+      }
+    },
+    "measurements": { "type": "array", "items": { "$ref": "#/$defs/measurement" } },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metrics_total", "metrics_measured", "percentiles_calculated", "percentiles_with_caveat", "missing_values", "missing_cohorts"],
+      "properties": {
+        "metrics_total": { "type": "integer" },
+        "metrics_measured": { "type": "integer" },
+        "percentiles_calculated": { "type": "integer" },
+        "percentiles_with_caveat": { "type": "integer" },
+        "missing_values": { "type": "array", "items": { "type": "string" } },
+        "missing_cohorts": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "interpretation": { "type": "string" },
+    "sourceReferences": {
+      "type": "array",
+      "items": { "type": "object", "required": ["id", "description"], "properties": { "id": { "type": "string" }, "description": { "type": "string" }, "url": { "type": "string" }, "license": { "type": "string" } } }
+    },
+    "pipeline": { "$ref": "#/$defs/pipeline" }
+  },
+  "$defs": {
+    "measurement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["metric", "definition", "value", "unit", "lower_is_better", "measured", "source", "benchmark", "percentile", "percentile_status", "comparability", "comparability_note", "missing"],
+      "properties": {
+        "metric": { "type": "string", "examples": ["forty_sec", "vertical_in", "ten_yd_split_sec"] },
+        "definition": { "type": "string" },
+        "value": { "type": ["number", "null"] },
+        "unit": { "enum": ["in", "lb", "s", "reps"] },
+        "lower_is_better": { "type": "boolean" },
+        "measured": { "type": "boolean" },
+        "source": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "required": ["provider", "record_id", "capture_method", "capture_confidence", "observed_on", "license_category", "notes"],
+          "properties": {
+            "provider": { "type": "string" }, "record_id": { "type": "string" }, "capture_method": { "type": "string" },
+            "capture_confidence": { "type": ["string", "null"] }, "observed_on": { "type": ["string", "null"] },
+            "license_category": { "type": ["string", "null"] }, "notes": { "type": ["string", "null"] }
+          }
+        },
+        "benchmark": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "required": ["cohort", "position_group", "reference_population", "sample_size", "missing_in_cohort", "seasons", "distribution", "source", "source_ref"],
+          "properties": {
+            "cohort": { "type": "string" }, "position_group": { "type": "string" }, "reference_population": { "type": "string" },
+            "sample_size": { "type": "integer", "minimum": 1 }, "missing_in_cohort": { "type": "integer", "minimum": 0 },
+            "seasons": { "type": "object", "required": ["from", "to"], "properties": { "from": { "type": "integer" }, "to": { "type": "integer" } } },
+            "distribution": { "type": "object", "required": ["p10", "p25", "p50", "p75", "p90"], "additionalProperties": { "type": "number" } },
+            "source": { "type": "string" }, "source_ref": { "type": "string" }
+          }
+        },
+        "percentile": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "percentile_status": { "enum": ["calculated", "not_measured", "no_reference_cohort", "insufficient_cohort"] },
+        "comparability": { "enum": ["comparable", "caveat", null] },
+        "comparability_note": { "type": ["string", "null"] },
+        "missing": {
+          "type": "object", "additionalProperties": false,
+          "required": ["value_missing", "cohort_missing", "percentile_withheld", "reason"],
+          "properties": {
+            "value_missing": { "type": "boolean" }, "cohort_missing": { "type": "boolean" },
+            "percentile_withheld": { "type": "boolean" }, "reason": { "type": ["string", "null"] }
+          }
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "percentile_status": { "const": "calculated" } } },
+          "then": { "properties": { "percentile": { "type": "number" }, "benchmark": { "type": "object" }, "value": { "type": "number" } } },
+          "else": { "properties": { "percentile": { "type": "null" } } } }
+      ]
+    },
+    "pipeline": {
+      "type": "object",
+      "required": ["status", "validated"],
+      "properties": {
+        "status": { "enum": ["succeeded", "failed", "unknown"] },
+        "validated": { "type": "boolean", "description": "true when every asset ran and no blocking quality check failed" },
+        "tool": { "const": "bruin" }, "bruin_version": { "type": "string" }, "pipeline": { "type": "string" },
+        "git_commit": { "type": ["string", "null"] }, "started_at": { "type": ["string", "null"] }, "finished_at": { "type": ["string", "null"] },
+        "exit_code": { "type": "integer" },
+        "assets": { "type": "object", "properties": { "total": { "type": "integer" }, "passed": { "type": "integer" } } },
+        "quality_checks": { "type": "object", "properties": { "passed": { "type": "integer" }, "failed": { "type": "integer" }, "failed_blocking": { "type": "integer" }, "failures": { "type": "array" } } },
+        "providers": { "type": "array", "items": { "type": "object", "required": ["provider", "status"] } }
+      }
+    }
+  }
+}

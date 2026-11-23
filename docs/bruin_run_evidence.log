@@ -1,0 +1,187 @@
+Analyzed the pipeline 'backfield_scouting_combine' with 15 assets.
+
+Pipeline: backfield_scouting_combine (.)
+  No issues found
+
+✓ Successfully validated 15 assets across 1 pipeline, all good.
+
+Interval: 2026-11-22T00:00:00Z - 2026-11-22T23:59:59Z
+
+Starting the pipeline execution...
+
+[12:48:17] Running:  bronze.provider_status
+[12:48:17] Running:  bronze.nfl_players
+[12:48:17] Running:  bronze.backfield_athlete_records
+[12:48:17] Running:  bronze.cfbd_player_season_passing
+[12:48:17] Running:  bronze.nfl_player_stats
+[12:48:17] Running:  bronze.nfl_combine
+[12:48:18] [bronze.backfield_athlete_records] >> Installed 1 package in 77ms
+[12:48:18] [bronze.nfl_combine] >> Installed 1 package in 77ms
+[12:48:18] [bronze.nfl_player_stats] >> Installed 1 package in 77ms
+[12:48:18] [bronze.nfl_players] >> Installed 1 package in 77ms
+[12:48:18] [bronze.cfbd_player_season_passing] >> Installed 1 package in 77ms
+[12:48:18] [bronze.provider_status] >> Installed 1 package in 77ms
+[12:48:20] [bronze.backfield_athlete_records] Successfully collected the data from the asset, uploading to the destination...
+[12:48:20] [bronze.provider_status] Successfully collected the data from the asset, uploading to the destination...
+[12:48:20] [bronze.cfbd_player_season_passing] Successfully collected the data from the asset, uploading to the destination...
+[12:48:20] [bronze.backfield_athlete_records] Successfully loaded the data from the asset into the destination.
+[12:48:20] Finished: bronze.backfield_athlete_records (3.102s)
+[12:48:20] Running:  bronze.backfield_athlete_records:is_synthetic:not_null
+[12:48:20] Running:  bronze.backfield_athlete_records:athlete_id:not_null
+[12:48:20] Running:  bronze.backfield_athlete_records:metric:not_null
+[12:48:21] [bronze.provider_status] Successfully loaded the data from the asset into the destination.
+[12:48:21] Finished: bronze.provider_status (3.257s)
+[12:48:21] Running:  bronze.provider_status:status:accepted_values
+[12:48:21] Running:  bronze.provider_status:provider:unique
+[12:48:21] Running:  bronze.provider_status:provider:not_null
+[12:48:21] [bronze.nfl_combine] Successfully collected the data from the asset, uploading to the destination...
+[12:48:21] Finished: bronze.backfield_athlete_records:metric:not_null (169ms)
+[12:48:21] Finished: bronze.provider_status:provider:unique (26ms)
+[12:48:21] Finished: bronze.backfield_athlete_records:is_synthetic:not_null (191ms)
+[12:48:21] Finished: bronze.provider_status:status:accepted_values (45ms)
+[12:48:21] Finished: bronze.backfield_athlete_records:athlete_id:not_null (210ms)
+[12:48:21] [bronze.cfbd_player_season_passing] Successfully loaded the data from the asset into the destination.
+[12:48:21] Finished: bronze.cfbd_player_season_passing (3.464s)
+[12:48:21] Running:  bronze.cfbd_player_season_passing:provider_status:accepted_values
+[12:48:21] [bronze.nfl_players] Successfully collected the data from the asset, uploading to the destination...
+[12:48:21] [bronze.nfl_combine] Successfully loaded the data from the asset into the destination.
+[12:48:21] Finished: bronze.nfl_combine (3.656s)
+[12:48:21] Running:  bronze.nfl_combine:pos:not_null
+[12:48:21] Running:  bronze.nfl_combine:season:not_null
+[12:48:21] Running:  bronze.nfl_combine:player_name:not_null
+[12:48:21] Finished: bronze.cfbd_player_season_passing:provider_status:accepted_values (201ms)
+[12:48:21] Running:  gold.ncaa_qb_context
+[12:48:21] Finished: bronze.provider_status:provider:not_null (417ms)
+[12:48:21] [bronze.nfl_players] Successfully loaded the data from the asset into the destination.
+[12:48:21] Finished: bronze.nfl_players (3.92s)
+[12:48:21] Finished: bronze.nfl_combine:season:not_null (273ms)
+[12:48:21] Finished: bronze.nfl_combine:player_name:not_null (283ms)
+[12:48:21] Finished: bronze.nfl_combine:pos:not_null (294ms)
+[12:48:21] Running:  silver.athletes
+[12:48:21] Finished: gold.ncaa_qb_context (307ms)
+[12:48:21] Running:  gold.ncaa_qb_context:provider_status:not_null
+[12:48:21] Finished: gold.ncaa_qb_context:provider_status:not_null (17ms)
+[12:48:21] Finished: silver.athletes (89ms)
+[12:48:21] Running:  silver.athletes:custom-check:no_athlete_appears_under_two_different_pfr_ids_in_one_season
+[12:48:21] Running:  silver.athletes:athlete_key:unique
+[12:48:21] Running:  silver.athletes:athlete_key:not_null
+[12:48:21] Running:  silver.athletes:identity_match_type:accepted_values
+[12:48:21] Finished: silver.athletes:athlete_key:unique (10ms)
+[12:48:21] Finished: silver.athletes:athlete_key:not_null (19ms)
+[12:48:21] Finished: silver.athletes:identity_match_type:accepted_values (29ms)
+[12:48:21] Finished: silver.athletes:custom-check:no_athlete_appears_under_two_different_pfr_ids_in_one_season (42ms)
+[12:48:21] Running:  silver.physical_measurements
+[12:48:21] Finished: silver.physical_measurements (116ms)
+[12:48:21] Running:  silver.physical_measurements:custom-check:one_value_per_athlete,_metric_and_season
+[12:48:21] Running:  silver.physical_measurements:value:not_null
+[12:48:21] Running:  silver.physical_measurements:unit:accepted_values
+[12:48:21] Running:  silver.physical_measurements:metric:accepted_values
+[12:48:21] Running:  silver.physical_measurements:value:positive
+[12:48:21] Running:  silver.physical_measurements:athlete_key:not_null
+[12:48:21] Running:  silver.physical_measurements:source_record_id:not_null
+[12:48:21] Finished: silver.physical_measurements:value:not_null (9ms)
+[12:48:21] Finished: silver.physical_measurements:value:positive (18ms)
+[12:48:21] Finished: silver.physical_measurements:unit:accepted_values (28ms)
+[12:48:21] Finished: silver.physical_measurements:metric:accepted_values (38ms)
+[12:48:22] Finished: silver.physical_measurements:custom-check:one_value_per_athlete,_metric_and_season (51ms)
+[12:48:22] Finished: silver.physical_measurements:athlete_key:not_null (61ms)
+[12:48:22] Finished: silver.physical_measurements:source_record_id:not_null (70ms)
+[12:48:22] Running:  gold.combine_benchmarks
+[12:48:22] Finished: gold.combine_benchmarks (27ms)
+[12:48:22] Running:  gold.combine_benchmarks:custom-check:qb_benchmark_cohort_exists_for_40-yard_dash
+[12:48:22] Running:  gold.combine_benchmarks:metric:not_null
+[12:48:22] Running:  gold.combine_benchmarks:position_group:not_null
+[12:48:22] Running:  gold.combine_benchmarks:n:positive
+[12:48:22] Running:  gold.combine_benchmarks:custom-check:percentiles_are_ordered
+[12:48:22] Finished: gold.combine_benchmarks:metric:not_null (8ms)
+[12:48:22] Finished: gold.combine_benchmarks:n:positive (17ms)
+[12:48:22] Finished: gold.combine_benchmarks:position_group:not_null (26ms)
+[12:48:22] Finished: gold.combine_benchmarks:custom-check:qb_benchmark_cohort_exists_for_40-yard_dash (36ms)
+[12:48:22] Finished: gold.combine_benchmarks:custom-check:percentiles_are_ordered (45ms)
+[12:48:22] Running:  gold.athlete_evidence
+[12:48:22] Running:  gold.athlete_benchmark_results
+[12:48:22] Finished: gold.athlete_evidence (20ms)
+[12:48:22] Running:  gold.athlete_evidence:percentile:max
+[12:48:22] Running:  gold.athlete_evidence:comparability:accepted_values
+[12:48:22] Running:  gold.athlete_evidence:percentile:min
+[12:48:22] Running:  gold.athlete_evidence:athlete_id:not_null
+[12:48:22] Finished: gold.athlete_benchmark_results (51ms)
+[12:48:22] Running:  gold.athlete_benchmark_results:percentile_status:accepted_values
+[12:48:22] Running:  gold.athlete_benchmark_results:custom-check:every_measured_value_carries_a_source_record_and_capture_method
+[12:48:22] Running:  gold.athlete_benchmark_results:metric:not_null
+[12:48:22] Running:  gold.athlete_benchmark_results:unit:not_null
+[12:48:22] Running:  gold.athlete_benchmark_results:athlete_id:not_null
+[12:48:22] Running:  gold.athlete_benchmark_results:custom-check:calculated_percentiles_always_have_a_cohort_of_at_least_20
+[12:48:22] Running:  gold.athlete_benchmark_results:custom-check:one_row_per_athlete_and_metric
+[12:48:22] Running:  gold.athlete_benchmark_results:percentile:min
+[12:48:22] Running:  gold.athlete_benchmark_results:percentile:max
+[12:48:22] Running:  gold.athlete_benchmark_results:custom-check:percentile_present_exactly_when_status_is_calculated
+[12:48:22] Finished: gold.athlete_evidence:comparability:accepted_values (39ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:percentile:min (19ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:percentile_status:accepted_values (28ms)
+[12:48:22] Finished: gold.athlete_evidence:percentile:min (67ms)
+[12:48:22] Finished: gold.athlete_evidence:percentile:max (77ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:metric:not_null (56ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:athlete_id:not_null (65ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:unit:not_null (74ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:custom-check:calculated_percentiles_always_have_a_cohort_of_at_least_20 (84ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:custom-check:percentile_present_exactly_when_status_is_calculated (94ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:custom-check:one_row_per_athlete_and_metric (103ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:percentile:max (112ms)
+[12:48:22] Finished: gold.athlete_evidence:athlete_id:not_null (152ms)
+[12:48:22] Finished: gold.athlete_benchmark_results:custom-check:every_measured_value_carries_a_source_record_and_capture_method (131ms)
+[12:48:22] [bronze.nfl_player_stats] Successfully collected the data from the asset, uploading to the destination...
+[12:48:23] [bronze.nfl_player_stats] Successfully loaded the data from the asset into the destination.
+[12:48:23] Finished: bronze.nfl_player_stats (5.325s)
+[12:48:23] Running:  bronze.nfl_player_stats:season:not_null
+[12:48:23] Running:  bronze.nfl_player_stats:player_id:not_null
+[12:48:23] Finished: bronze.nfl_player_stats:season:not_null (9ms)
+[12:48:23] Running:  silver.nfl_qb_season_stats
+[12:48:23] Failed: bronze.nfl_player_stats:player_id:not_null (10ms)
+[12:48:23] Finished: silver.nfl_qb_season_stats (9ms)
+[12:48:23] Running:  silver.nfl_qb_season_stats:custom-check:unique_qb-season
+[12:48:23] Running:  silver.nfl_qb_season_stats:player_id:not_null
+[12:48:23] Running:  silver.nfl_qb_season_stats:custom-check:completions_never_exceed_attempts
+[12:48:23] Running:  silver.nfl_qb_season_stats:attempts:non_negative
+[12:48:23] Finished: silver.nfl_qb_season_stats:custom-check:completions_never_exceed_attempts (0s)
+[12:48:23] Finished: silver.nfl_qb_season_stats:attempts:non_negative (0s)
+[12:48:23] Finished: silver.nfl_qb_season_stats:player_id:not_null (0s)
+[12:48:23] Finished: silver.nfl_qb_season_stats:custom-check:unique_qb-season (0s)
+[12:48:23] Running:  gold.qb_physical_comparables
+[12:48:23] Running:  gold.pipeline_quality
+[12:48:23] Finished: gold.pipeline_quality (3ms)
+[12:48:23] Running:  gold.pipeline_quality:dataset:unique
+[12:48:23] Finished: gold.pipeline_quality:dataset:unique (0s)
+[12:48:23] Finished: gold.qb_physical_comparables (8ms)
+[12:48:23] Running:  gold.qb_physical_comparables:rank:positive
+[12:48:23] Finished: gold.qb_physical_comparables:rank:positive (0s)
+
+==================================================
+
+PASS bronze.backfield_athlete_records ...
+PASS bronze.provider_status ...
+PASS bronze.cfbd_player_season_passing .
+PASS bronze.nfl_combine ...
+PASS bronze.nfl_players 
+PASS gold.ncaa_qb_context .
+PASS silver.athletes ....
+PASS silver.physical_measurements .......
+PASS gold.combine_benchmarks .....
+PASS gold.athlete_evidence ....
+PASS gold.athlete_benchmark_results ..........
+PASS bronze.nfl_player_stats .F
+PASS silver.nfl_qb_season_stats ....
+PASS gold.pipeline_quality .
+PASS gold.qb_physical_comparables .
+
+
+bruin run completed with failures in 5.355s
+
+ ✗ Assets executed      1 failed due to checks / 14 succeeded
+ ✗ Quality checks       1 failed / 48 succeeded
+
+
+1 assets failed
+└── bronze.nfl_player_stats
+    └── player_id.not_null - column 'player_id' has 130 null values
+
