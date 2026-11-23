@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1.0",
   "evaluationId": "bfe-bf-demo-qb-001-bef47b594077",
-  "generatedAt": "2026-11-23T21:38:15+00:00",
+  "generatedAt": "2026-11-23T22:34:36+00:00",
   "athlete": {
     "athleteId": "bf-demo-qb-001",
     "displayName": "Demo QB 'Jordan Avery' (synthetic)",
@@ -441,7 +441,7 @@
   "pffContext": {
     "provider": "pff",
     "status": "available",
-    "statusDetail": "whoami ok: tier=pro entitled=true; internal-use licence, raw data not redistributed",
+    "statusDetail": "Redacted in public responses: PFF Pro licensed values are served only to authenticated server-side consumers (/v1/private/*).",
     "license": {
       "provider": "Pro Football Focus (PFF)",
       "tier_required": "PFF Pro",
@@ -639,6 +639,15 @@
         "status": "available",
         "detail": "whoami ok: tier=pro entitled=true; internal-use licence, raw data not redistributed",
         "license_category": "PFF Pro licence - internal analysis only; redistribution not confirmed"
+      }
+    ],
+    "dataQualityExceptions": [
+      {
+        "check": "bronze.nfl_player_stats: player_id.not_null",
+        "detail": "player_id.not_null - column 'player_id' has 130 null values",
+        "blocking": false,
+        "status": "open - accepted data-quality exception",
+        "impact": "Upstream nflverse weekly player stats contain rows with no player_id (GSIS). They cannot be attributed to an athlete, are kept in bronze for lineage, and are excluded from silver.nfl_qb_season_stats. Combine benchmarks and PFF data are unaffected."
       }
     ]
   }

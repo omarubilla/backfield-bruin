@@ -3,6 +3,8 @@
 Reproducible Bronze → Silver → Gold football analytics pipeline built with [Bruin](https://github.com/bruin-data/bruin) + DuckDB,
 publishing validated athlete benchmark results for the Backfield coaching agents.
 
+**Deployed API:** `https://omar-ubilla--backfield-bruin-api.us-east.modal.run` — see [docs/INTEGRATION.md](docs/INTEGRATION.md) (public vs. token-protected routes).
+
 **Integration contract:** [docs/BENCHMARK_EXPORT.md](docs/BENCHMARK_EXPORT.md) · schema [docs/athlete_benchmark.schema.json](docs/athlete_benchmark.schema.json) · sample [docs/sample_payload.json](docs/sample_payload.json)
 
 ## Quick start

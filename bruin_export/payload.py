@@ -15,7 +15,7 @@ import duckdb
 SCHEMA_VERSION = "1.1.0"
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DB = os.environ.get("BRUIN_DUCKDB", os.path.join(ROOT, "data", "scouting.duckdb"))
-RUN_STATUS = os.path.join(ROOT, "logs", "bruin_run_latest.json")
+RUN_STATUS = os.environ.get("BRUIN_RUN_STATUS", os.path.join(ROOT, "logs", "bruin_run_latest.json"))
 
 
 def _rows(sql: str, params=()) -> list[dict]:
@@ -32,11 +32,25 @@ def _iso(v):
     return v.isoformat() if hasattr(v, "isoformat") else v
 
 
+KNOWN_EXCEPTIONS = {
+    "bronze.nfl_player_stats": "Upstream nflverse weekly player stats contain rows with no player_id (GSIS). They cannot be "
+                               "attributed to an athlete, are kept in bronze for lineage, and are excluded from "
+                               "silver.nfl_qb_season_stats. Combine benchmarks and PFF data are unaffected.",
+}
+
+
 def pipeline_status() -> dict:
     if not os.path.exists(RUN_STATUS):
         return {"status": "unknown", "validated": False, "detail": "no recorded run; execute scripts/run_pipeline.sh"}
     s = json.load(open(RUN_STATUS))
     providers = _rows("SELECT provider, status, detail, license_category FROM bronze.provider_status ORDER BY provider")
+    exceptions = [{
+        "check": f"{f['asset']}: {f['check'].split(' - ')[0]}",
+        "detail": f["check"],
+        "blocking": False,
+        "status": "open - accepted data-quality exception",
+        "impact": KNOWN_EXCEPTIONS.get(f["asset"], "Rows failing this check are excluded downstream."),
+    } for f in s["check_failures"] if not f["blocking"]]
     return {
         "status": "succeeded" if s["validated"] else "failed",
         "validated": s["validated"],
@@ -47,6 +61,7 @@ def pipeline_status() -> dict:
         "quality_checks": {"passed": s["checks_passed"], "failed": s["checks_failed"],
                            "failed_blocking": s["checks_failed_blocking"], "failures": s["check_failures"]},
         "providers": providers,
+        "dataQualityExceptions": exceptions,
     }
 
 
