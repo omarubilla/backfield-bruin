@@ -16,4 +16,9 @@ logs/runs
 logs/*.log
 *.py[cod]demo/*.mp4
 
-*.py[cod]
+*.py[cod]data/
+logs/
+server/
+web/
+.claude/
+scripts/run_api.sh
