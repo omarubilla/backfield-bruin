@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "1.0.0",
-  "evaluationId": "bfe-bf-demo-qb-001-479f8bd818ed",
-  "generatedAt": "2026-11-23T20:49:13+00:00",
+  "schemaVersion": "1.1.0",
+  "evaluationId": "bfe-bf-demo-qb-001-bef47b594077",
+  "generatedAt": "2026-11-23T21:38:15+00:00",
   "athlete": {
     "athleteId": "bf-demo-qb-001",
     "displayName": "Demo QB 'Jordan Avery' (synthetic)",
@@ -430,24 +430,169 @@
     {
       "id": "backfield-demo (synthetic)",
       "description": "Backfield athlete records (synthetic demo data in this build)"
+    },
+    {
+      "id": "pff",
+      "description": "Pro Football Focus Developer API (PFF Pro): NCAA/NFL stats, snaps and PFF grades",
+      "url": "https://developer.pff.com/",
+      "license": "PFF Pro - internal analysis only"
     }
   ],
+  "pffContext": {
+    "provider": "pff",
+    "status": "available",
+    "statusDetail": "whoami ok: tier=pro entitled=true; internal-use licence, raw data not redistributed",
+    "license": {
+      "provider": "Pro Football Focus (PFF)",
+      "tier_required": "PFF Pro",
+      "use": "internal analysis only; raw PFF rows are never exported",
+      "redistribution": "not confirmed - aggregates and player context are served to internal consumers only"
+    },
+    "labeling": "PFF grades are PFF's proprietary 0-100 evaluations (grade_source = 'PFF'). They are not Backfield evaluations and are never averaged with NFL Combine benchmarks.",
+    "athleteMatch": {
+      "matched": false,
+      "method": null,
+      "pffPlayerId": null,
+      "reason": "No PFF player id in this athlete's identity record (PFF covers NCAA and NFL players; high-school athletes are not in PFF)."
+    },
+    "playerSeasons": [],
+    "positionReference": [
+      {
+        "league": "nfl",
+        "season": 2025,
+        "position": "QB",
+        "gradeMetric": "pff_grade_offense",
+        "definition": "PFF overall offense grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "snaps_offense >= 200",
+          "sampleSize": 53
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/nfl/2025/QB/pff_grade_offense"
+      },
+      {
+        "league": "nfl",
+        "season": 2025,
+        "position": "QB",
+        "gradeMetric": "pff_grade_pass",
+        "definition": "PFF passing grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "pass_dropbacks >= 100",
+          "sampleSize": 53
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/nfl/2025/QB/pff_grade_pass"
+      },
+      {
+        "league": "nfl",
+        "season": 2024,
+        "position": "QB",
+        "gradeMetric": "pff_grade_offense",
+        "definition": "PFF overall offense grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "snaps_offense >= 200",
+          "sampleSize": 51
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/nfl/2024/QB/pff_grade_offense"
+      },
+      {
+        "league": "nfl",
+        "season": 2024,
+        "position": "QB",
+        "gradeMetric": "pff_grade_pass",
+        "definition": "PFF passing grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "pass_dropbacks >= 100",
+          "sampleSize": 55
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/nfl/2024/QB/pff_grade_pass"
+      },
+      {
+        "league": "ncaa",
+        "season": 2025,
+        "position": "QB",
+        "gradeMetric": "pff_grade_offense",
+        "definition": "PFF overall offense grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "snaps_offense >= 200",
+          "sampleSize": 355
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/ncaa/2025/QB/pff_grade_offense"
+      },
+      {
+        "league": "ncaa",
+        "season": 2025,
+        "position": "QB",
+        "gradeMetric": "pff_grade_pass",
+        "definition": "PFF passing grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "pass_dropbacks >= 100",
+          "sampleSize": 350
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/ncaa/2025/QB/pff_grade_pass"
+      },
+      {
+        "league": "ncaa",
+        "season": 2024,
+        "position": "QB",
+        "gradeMetric": "pff_grade_offense",
+        "definition": "PFF overall offense grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "snaps_offense >= 200",
+          "sampleSize": 345
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/ncaa/2024/QB/pff_grade_offense"
+      },
+      {
+        "league": "ncaa",
+        "season": 2024,
+        "position": "QB",
+        "gradeMetric": "pff_grade_pass",
+        "definition": "PFF passing grade",
+        "gradeSource": "PFF",
+        "cohort": {
+          "qualifier": "pass_dropbacks >= 100",
+          "sampleSize": 334
+        },
+        "distribution": null,
+        "sourceRef": "bruin:gold.pff_position_grade_distributions/ncaa/2024/QB/pff_grade_pass"
+      }
+    ],
+    "redacted": true,
+    "sourceRefs": [
+      "bruin:gold.pff_position_grade_distributions",
+      "bruin:gold.pff_player_context",
+      "https://developer.pff.com/"
+    ]
+  },
   "pipeline": {
     "status": "succeeded",
     "validated": true,
     "tool": "bruin",
     "bruin_version": "Current: v0.11.832 (3590ddcdf90425e609ceb8e0e2c352fb4de995b6)",
     "pipeline": "backfield_scouting_combine",
-    "git_commit": "06131cf",
-    "started_at": "2026-11-23T20:48:17Z",
-    "finished_at": "2026-11-23T20:48:23Z",
+    "git_commit": "0826921",
+    "started_at": "2026-11-23T21:34:35Z",
+    "finished_at": "2026-11-23T21:36:54Z",
     "exit_code": 1,
     "assets": {
-      "total": 15,
-      "passed": 15
+      "total": 25,
+      "passed": 25
     },
     "quality_checks": {
-      "passed": 48,
+      "passed": 73,
       "failed": 1,
       "failed_blocking": 0,
       "failures": [
@@ -491,9 +636,9 @@
       },
       {
         "provider": "pff",
-        "status": "unavailable",
-        "detail": "PFF_API_KEY not configured; PFF grades are never invented or scraped",
-        "license_category": "commercial licence required"
+        "status": "available",
+        "detail": "whoami ok: tier=pro entitled=true; internal-use licence, raw data not redistributed",
+        "license_category": "PFF Pro licence - internal analysis only; redistribution not confirmed"
       }
     ]
   }

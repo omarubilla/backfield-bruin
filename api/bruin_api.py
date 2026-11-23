@@ -7,6 +7,9 @@
   GET /v1/athletes/{athlete_id}/benchmark     evaluation payload (schema 1.0.0)
   GET /v1/evaluations/{evaluation_id}         same payload, fetched by evaluationId (current data version only)
   GET /v1/benchmarks/{position}               raw position cohort distributions (gold.combine_benchmarks)
+  GET /v1/pff/players?name=&league=&season=   PFF player lookup (gold.pff_player_context)
+  GET /v1/pff/players/{pff_player_id}         PFF seasons for one player
+  GET /v1/pff/distributions/{position}        PFF grade distributions within position
 
 Run:  scripts/run_bruin_api.sh   (default http://127.0.0.1:8787)
 """
@@ -72,3 +75,34 @@ def benchmarks(position: str):
     if not rows:
         raise HTTPException(404, f"no cohort for position '{position}'")
     return rows
+
+
+# --- PFF context (internal LAN consumers only; PFF Pro licence, redistribution not confirmed) ---
+
+@app.get("/v1/pff/players")
+def pff_players(name: str, league: str | None = None, season: int | None = None, limit: int = 25):
+    if len(name.strip()) < 2:
+        raise HTTPException(400, "name must be at least 2 characters")
+    return {"gradeSource": "PFF", "license": P.PFF_LICENSE, "results": P.pff_search(name.strip(), league, season, min(limit, 100))}
+
+
+@app.get("/v1/pff/players/{pff_player_id}")
+def pff_player(pff_player_id: str):
+    rows = P.pff_player(pff_player_id)
+    if not rows:
+        raise HTTPException(404, "unknown PFF player id")
+    return {"gradeSource": "PFF", "license": P.PFF_LICENSE, "seasons": rows}
+
+
+@app.get("/v1/pff/distributions/{position}")
+def pff_distributions(position: str, league: str | None = None, season: int | None = None):
+    sql = "SELECT * FROM gold.pff_position_grade_distributions WHERE position = ?"
+    params: list = [position.upper()]
+    if league:
+        sql += " AND league = ?"; params.append(league)
+    if season:
+        sql += " AND season = ?"; params.append(season)
+    rows = P._rows(sql + " ORDER BY league, season, grade_metric", params)
+    if not rows:
+        raise HTTPException(404, "no PFF distribution for that position/league/season")
+    return {"gradeSource": "PFF", "license": P.PFF_LICENSE, "distributions": rows}

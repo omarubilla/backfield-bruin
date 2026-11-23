@@ -44,7 +44,16 @@ def probe_cfbd():
 def probe_pff():
     if not os.environ.get("PFF_API_KEY"):
         return "unavailable", "PFF_API_KEY not configured; PFF grades are never invented or scraped"
-    return "unavailable", "key present but licence for redistribution/demo use not confirmed; provider disabled"
+    try:
+        r = requests.get("https://api.pff.com/v1/auth/whoami", headers={"Authorization": f"Bearer {os.environ['PFF_API_KEY']}"}, timeout=20)
+        if not r.ok:
+            return "unavailable", f"whoami HTTP {r.status_code} {r.json().get('error', {}).get('code', '') if r.headers.get('content-type', '').startswith('application/json') else ''}"
+        d = r.json()
+        if not d.get("entitled"):
+            return "unavailable", f"not entitled: {d.get('entitlement_reason')}"
+        return "available", f"whoami ok: tier={d.get('tier')} entitled=true; internal-use licence, raw data not redistributed"
+    except Exception as e:  # noqa: BLE001
+        return "unavailable", f"probe error: {type(e).__name__}"
 
 
 def materialize():
@@ -54,7 +63,7 @@ def materialize():
     rows = [
         ("nflverse", "available", "public nflverse releases via nflreadpy", "public-open-data (attribution)"),
         ("collegefootballdata", cfbd[0], cfbd[1], "CFBD API terms (free tier, rate limited)"),
-        ("pff", pff[0], pff[1], "commercial licence required"),
+        ("pff", pff[0], pff[1], "PFF Pro licence - internal analysis only; redistribution not confirmed"),
         ("backfield-demo", "synthetic", "seeds/backfield_demo_athletes.json (synthetic demo athlete)", "synthetic-demo"),
         ("maxpreps", "interface_only", "no authorised API access; not scraped", "restricted"),
         ("hudl", "interface_only", "attribution URL only; athlete uploads the clip directly", "restricted"),

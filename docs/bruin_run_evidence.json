@@ -2,13 +2,13 @@
   "pipeline": "backfield_scouting_combine",
   "tool": "bruin",
   "bruin_version": "Current: v0.11.832 (3590ddcdf90425e609ceb8e0e2c352fb4de995b6)",
-  "started_at": "2026-11-23T20:48:17Z",
-  "finished_at": "2026-11-23T20:48:23Z",
+  "started_at": "2026-11-23T21:34:35Z",
+  "finished_at": "2026-11-23T21:36:54Z",
   "exit_code": 1,
-  "git_commit": "06131cf",
-  "assets_total": 15,
-  "assets_passed": 15,
-  "checks_passed": 48,
+  "git_commit": "0826921",
+  "assets_total": 25,
+  "assets_passed": 25,
+  "checks_passed": 73,
   "checks_failed": 1,
   "checks_failed_blocking": 0,
   "check_failures": [
@@ -29,19 +29,19 @@
       }
     },
     {
-      "asset": "bronze.provider_status",
+      "asset": "bronze.cfbd_player_season_passing",
       "status": "passed",
       "checks": {
-        "passed": 3,
+        "passed": 1,
         "failed": 0,
         "skipped": 0
       }
     },
     {
-      "asset": "bronze.cfbd_player_season_passing",
+      "asset": "bronze.provider_status",
       "status": "passed",
       "checks": {
-        "passed": 1,
+        "passed": 3,
         "failed": 0,
         "skipped": 0
       }
@@ -137,6 +137,78 @@
       }
     },
     {
+      "asset": "gold.qb_physical_comparables",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.pff_ncaa_rosters",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.pff_rushing_summary",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.pff_passing_summary",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.pff_offense_summary",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.pff_receiving_summary",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "silver.pff_player_seasons",
+      "status": "passed",
+      "checks": {
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "silver.athlete_identity_xref",
+      "status": "passed",
+      "checks": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
       "asset": "gold.pipeline_quality",
       "status": "passed",
       "checks": {
@@ -146,10 +218,28 @@
       }
     },
     {
-      "asset": "gold.qb_physical_comparables",
+      "asset": "silver.pff_grades",
       "status": "passed",
       "checks": {
-        "passed": 1,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "gold.pff_position_grade_distributions",
+      "status": "passed",
+      "checks": {
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "gold.pff_player_context",
+      "status": "passed",
+      "checks": {
+        "passed": 4,
         "failed": 0,
         "skipped": 0
       }

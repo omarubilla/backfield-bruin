@@ -4,6 +4,8 @@
 #   CFBD_API_KEY=... scripts/run_pipeline.sh   (optional; enables the CFBD provider)
 set -uo pipefail
 cd "$(dirname "$0")/.."
+# Local secrets (PFF_API_KEY, CFBD_API_KEY) live in ./.env, which is git-ignored and never printed.
+if [ -f .env ]; then set -a; . ./.env; set +a; fi
 BRUIN="${BRUIN_BIN:-$(command -v bruin || echo ~/.local/bin/bruin)}"
 if [ -z "${UV:-}" ]; then
   if uv --version >/dev/null 2>&1; then UV=$(command -v uv); else UV=~/.pyenv/versions/3.10.15/bin/uv; fi

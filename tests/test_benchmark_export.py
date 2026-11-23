@@ -83,3 +83,31 @@ def test_pipeline_status_embedded(doc):
     assert p["tool"] == "bruin" and p["validated"] is True and p["status"] == "succeeded"
     assert p["quality_checks"]["failed_blocking"] == 0
     assert {x["provider"] for x in p["providers"]} >= {"nflverse", "collegefootballdata", "pff", "backfield-demo"}
+
+
+def test_pff_context_is_labelled_and_separate(doc):
+    ctx = doc["pffContext"]
+    assert ctx["provider"] == "pff" and ctx["status"] == "available"
+    assert all(r["gradeSource"] == "PFF" and r["gradeMetric"].startswith("pff_grade_") for r in ctx["positionReference"])
+    assert {r["league"] for r in ctx["positionReference"]} == {"nfl", "ncaa"}
+    # PFF never leaks into the combine measurements
+    assert not any("pff" in m["metric"] for m in doc["measurements"])
+    assert all((m["benchmark"] or {}).get("source", "nflverse combine") == "nflverse combine" for m in doc["measurements"])
+
+
+def test_synthetic_hs_athlete_is_not_matched_to_pff(doc):
+    m = doc["pffContext"]["athleteMatch"]
+    assert m["matched"] is False and m["pffPlayerId"] is None and doc["pffContext"]["playerSeasons"] == []
+
+
+def test_redacted_payload_has_no_pff_values():
+    d = P.build(ATHLETE, redact_pff=True)
+    assert d["pffContext"]["redacted"] is True
+    assert all(r["distribution"] is None for r in d["pffContext"]["positionReference"])
+    jsonschema.Draft202012Validator(SCHEMA).validate(json.loads(json.dumps(d, default=str)))
+
+
+def test_pff_player_lookup_links_by_provider_id():
+    rows = P.pff_search("Joe Burrow", league="nfl", season=2025)
+    assert rows and rows[0]["identity_match_type"] == "provider_id_nflverse_pff_id" and rows[0]["pfr_id"] == "BurrJo01"
+    assert rows[0]["grade_source"] == "PFF"

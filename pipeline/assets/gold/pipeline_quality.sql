@@ -15,6 +15,9 @@ depends:
   - gold.combine_benchmarks
   - gold.athlete_evidence
   - gold.ncaa_qb_context
+  - silver.pff_player_seasons
+  - silver.athlete_identity_xref
+  - bronze.pff_ncaa_rosters
 columns:
   - name: dataset
     type: varchar
@@ -35,3 +38,8 @@ UNION ALL SELECT 'silver.nfl_qb_season_stats', 'nflverse', count(*), 0, NULL, NU
 UNION ALL SELECT 'gold.combine_benchmarks', 'nflverse', count(*), NULL, NULL, NULL, min(season_min) || '-' || max(season_max) FROM gold.combine_benchmarks
 UNION ALL SELECT 'gold.athlete_evidence', 'backfield-demo (synthetic)', count(*), NULL, NULL, NULL, NULL FROM gold.athlete_evidence
 UNION ALL SELECT 'gold.ncaa_qb_context', 'collegefootballdata', count(*) FILTER (WHERE provider_status = 'available'), NULL, NULL, NULL, any_value(provider_status) FROM gold.ncaa_qb_context
+UNION ALL SELECT 'silver.pff_player_seasons', 'pff', count(*), count(*) FILTER (WHERE pff_player_id IS NULL), NULL, max(ingested_at),
+  min(league) || '/' || max(league) || ' ' || min(season) || '-' || max(season) FROM silver.pff_player_seasons
+UNION ALL SELECT 'bronze.pff_ncaa_rosters', 'pff', count(*) FILTER (WHERE player_id IS NOT NULL), count(*) FILTER (WHERE player_id IS NULL), NULL, max(_ingested_at), 'ncaa 2025, 6 teams' FROM bronze.pff_ncaa_rosters
+UNION ALL SELECT 'silver.athlete_identity_xref', 'pff x nflverse', count(*), count(*) FILTER (WHERE match_type = 'unmatched'), NULL, NULL,
+  count(*) FILTER (WHERE match_type <> 'unmatched') || ' provider-id links' FROM silver.athlete_identity_xref
