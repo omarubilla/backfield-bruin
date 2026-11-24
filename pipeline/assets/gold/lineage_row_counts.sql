@@ -32,6 +32,10 @@ depends:
   - gold.pff_player_context
   - gold.qb_physical_comparables
   - gold.ncaa_qb_context
+  - bronze.live_assessments
+  - silver.live_assessments
+  - gold.live_reference_catalog
+  - gold.live_assessment_comparisons
 columns:
   - name: asset
     type: varchar
@@ -71,3 +75,7 @@ UNION ALL SELECT 'gold', 'gold.pff_position_grade_distributions', 'pff', 'PFF gr
 UNION ALL SELECT 'gold', 'gold.pff_player_context', 'pff', 'PFF player lookup', count(*) FROM gold.pff_player_context
 UNION ALL SELECT 'gold', 'gold.qb_physical_comparables', 'nflverse', 'descriptive QB comparables', count(*) FROM gold.qb_physical_comparables
 UNION ALL SELECT 'gold', 'gold.ncaa_qb_context', 'collegefootballdata', 'CFBD context (unavailable)', count(*) FILTER (WHERE provider_status = 'available') FROM gold.ncaa_qb_context
+UNION ALL SELECT 'bronze', 'bronze.live_assessments', 'backfield-live', 'live athlete assessments (sample + ingested)', count(*) FROM bronze.live_assessments
+UNION ALL SELECT 'silver', 'silver.live_assessments', 'backfield-live', 'normalized live assessments', count(*) FROM silver.live_assessments
+UNION ALL SELECT 'gold', 'gold.live_reference_catalog', 'nflverse', 'drill -> reference cohort catalog (10-yd unavailable)', count(*) FROM gold.live_reference_catalog
+UNION ALL SELECT 'gold', 'gold.live_assessment_comparisons', 'backfield-live x nflverse', 'live comparisons with status', count(*) FROM gold.live_assessment_comparisons

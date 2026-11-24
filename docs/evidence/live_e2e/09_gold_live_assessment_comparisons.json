@@ -1,0 +1,58 @@
+[
+  {
+    "evaluation_id": "sample-e2e-ardash-10yd",
+    "drill": "10_yard_dash",
+    "value": 1.74,
+    "unit": "s",
+    "method": "arkit_assisted",
+    "calibration_status": "calibrated",
+    "quality_status": "unverified",
+    "status": "unavailable",
+    "percentile": null,
+    "descriptive_band": null,
+    "reference_n": null,
+    "reason": "No 10-yard split reference cohort exists in the ingested sources (nflverse combine publishes no splits; PFF has no sprint split fields)."
+  },
+  {
+    "evaluation_id": "sample-live-combine-001",
+    "drill": "10_yard_dash",
+    "value": 1.71,
+    "unit": "s",
+    "method": "arkit_assisted",
+    "calibration_status": "calibrated",
+    "quality_status": "unverified",
+    "status": "unavailable",
+    "percentile": null,
+    "descriptive_band": null,
+    "reference_n": null,
+    "reason": "No 10-yard split reference cohort exists in the ingested sources (nflverse combine publishes no splits; PFF has no sprint split fields)."
+  },
+  {
+    "evaluation_id": "sample-live-combine-002",
+    "drill": "40_yard_dash",
+    "value": 4.95,
+    "unit": "s",
+    "method": "arkit_assisted",
+    "calibration_status": "calibrated",
+    "quality_status": "unverified",
+    "status": "provisional",
+    "percentile": null,
+    "descriptive_band": "p75-p90",
+    "reference_n": 413,
+    "reason": "Timing method or quality not equivalent to electronic combine timing; descriptive band only."
+  },
+  {
+    "evaluation_id": "sample-live-combine-003",
+    "drill": "40_yard_dash",
+    "value": 4.88,
+    "unit": "s",
+    "method": "electronic_laser",
+    "calibration_status": "calibrated",
+    "quality_status": "verified",
+    "status": "verified",
+    "percentile": 32.4,
+    "descriptive_band": "p50-p75",
+    "reference_n": 413,
+    "reason": null
+  }
+]

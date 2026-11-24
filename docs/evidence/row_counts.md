@@ -4,6 +4,7 @@
 |---|---|---|---|---|
 | bronze | bronze.backfield_athlete_records | backfield-demo | 7 | synthetic demo athlete evidence |
 | bronze | bronze.cfbd_player_season_passing | collegefootballdata | 0 | NCAA passing/rosters/recruiting (key not configured) |
+| bronze | bronze.live_assessments | backfield-live | 6 | live athlete assessments (sample + ingested) |
 | bronze | bronze.nfl_combine | nflverse | 8968 | NFL Scouting Combine results |
 | bronze | bronze.nfl_player_stats | nflverse | 110390 | weekly player stats 2019-2024 |
 | bronze | bronze.nfl_players | nflverse | 24871 | player identity + cross-provider ids |
@@ -17,6 +18,7 @@
 | silver | silver.athlete_identity_xref [linked to combine] | pff x nflverse x combine | 1288 | linked through to a combine athlete |
 | silver | silver.athlete_identity_xref [linked] | pff x nflverse | 2245 | linked by provider id (nflverse pff_id) |
 | silver | silver.athletes | nflverse | 8950 | Athlete entity keyed on provider ids |
+| silver | silver.live_assessments | backfield-live | 4 | normalized live assessments |
 | silver | silver.nfl_qb_season_stats | nflverse | 476 | QB season rollups (null-id rows excluded) |
 | silver | silver.pff_grades | pff | 99003 | PFF grades long form |
 | silver | silver.pff_player_seasons | pff | 29572 | PFF reports joined per player-league-season |
@@ -24,6 +26,8 @@
 | gold | gold.athlete_benchmark_results | backfield-demo | 9 | contract table (demo athlete) |
 | gold | gold.athlete_evidence | backfield-demo | 7 | demo athlete evidence |
 | gold | gold.combine_benchmarks | nflverse | 88 | position x metric combine distributions |
+| gold | gold.live_assessment_comparisons | backfield-live x nflverse | 4 | live comparisons with status |
+| gold | gold.live_reference_catalog | nflverse | 66 | drill -> reference cohort catalog (10-yd unavailable) |
 | gold | gold.ncaa_qb_context | collegefootballdata | 0 | CFBD context (unavailable) |
 | gold | gold.pff_player_context | pff | 29572 | PFF player lookup |
 | gold | gold.pff_position_grade_distributions | pff | 58 | PFF grade distributions within position |

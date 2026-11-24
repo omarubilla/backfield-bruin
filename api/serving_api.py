@@ -35,7 +35,7 @@ PUBLIC_PFF_NOTE = ("Redacted in public responses: PFF Pro licensed values are se
                    "server-side consumers (/v1/private/*).")
 
 app = FastAPI(title="Backfield Bruin Benchmark API", version=P.SCHEMA_VERSION, docs_url="/docs", redoc_url=None)
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET"], allow_headers=["Authorization"])
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"], allow_headers=["Authorization"])
 
 
 def require_token(authorization: str | None = Header(default=None)):
@@ -204,3 +204,7 @@ def showcase():
 
 app.include_router(public)
 app.include_router(private)
+
+from api.live_routes import router as live_router  # noqa: E402
+
+app.include_router(live_router)

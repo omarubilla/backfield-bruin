@@ -1,0 +1,364 @@
+Analyzed the pipeline 'backfield_scouting_combine' with 32 assets.
+
+Pipeline: backfield_scouting_combine (.)
+  No issues found
+
+✓ Successfully validated 32 assets across 1 pipeline, all good.
+
+Interval: 2026-11-23T00:00:00Z - 2026-11-23T23:59:59Z
+
+Starting the pipeline execution...
+
+[16:14:41] Running:  bronze.provider_status
+[16:14:41] Running:  bronze.pff_offense_summary
+[16:14:41] Running:  bronze.pff_rushing_summary
+[16:14:41] Running:  bronze.nfl_players
+[16:14:41] Running:  bronze.pff_receiving_summary
+[16:14:41] Running:  bronze.backfield_athlete_records
+[16:14:41] Running:  bronze.cfbd_player_season_passing
+[16:14:41] Running:  bronze.live_assessments
+[16:14:41] Running:  bronze.nfl_combine
+[16:14:41] Running:  bronze.nfl_player_stats
+[16:14:41] Running:  bronze.pff_passing_summary
+[16:14:41] Running:  bronze.pff_ncaa_rosters
+[16:14:42] [bronze.pff_rushing_summary] >> Installed 1 package in 80ms
+[16:14:42] [bronze.cfbd_player_season_passing] >> Installed 1 package in 94ms
+[16:14:42] [bronze.pff_passing_summary] >> Installed 1 package in 94ms
+[16:14:42] [bronze.pff_ncaa_rosters] >> Installed 1 package in 94ms
+[16:14:42] [bronze.pff_receiving_summary] >> Installed 1 package in 107ms
+[16:14:42] [bronze.backfield_athlete_records] >> Installed 1 package in 107ms
+[16:14:42] [bronze.live_assessments] >> Installed 1 package in 107ms
+[16:14:42] [bronze.nfl_players] >> Installed 1 package in 112ms
+[16:14:42] [bronze.nfl_combine] >> Installed 1 package in 130ms
+[16:14:42] [bronze.pff_offense_summary] >> Installed 1 package in 130ms
+[16:14:42] [bronze.nfl_player_stats] >> Installed 1 package in 131ms
+[16:14:42] [bronze.provider_status] >> Installed 1 package in 132ms
+[16:14:43] [bronze.backfield_athlete_records] Successfully collected the data from the asset, uploading to the destination...
+[16:14:43] [bronze.live_assessments] Successfully collected the data from the asset, uploading to the destination...
+[16:14:44] [bronze.cfbd_player_season_passing] Successfully collected the data from the asset, uploading to the destination...
+[16:14:44] [bronze.backfield_athlete_records] Successfully loaded the data from the asset into the destination.
+[16:14:44] Finished: bronze.backfield_athlete_records (2.546s)
+[16:14:44] Running:  bronze.backfield_athlete_records:athlete_id:not_null
+[16:14:44] Running:  bronze.backfield_athlete_records:metric:not_null
+[16:14:44] Running:  bronze.backfield_athlete_records:is_synthetic:not_null
+[16:14:44] [bronze.live_assessments] Successfully loaded the data from the asset into the destination.
+[16:14:44] Finished: bronze.live_assessments (2.702s)
+[16:14:44] Running:  bronze.live_assessments:athlete_id:not_null
+[16:14:44] Running:  bronze.live_assessments:evaluation_id:not_null
+[16:14:44] Finished: bronze.backfield_athlete_records:metric:not_null (174ms)
+[16:14:44] Finished: bronze.live_assessments:athlete_id:not_null (33ms)
+[16:14:44] [bronze.nfl_combine] Successfully collected the data from the asset, uploading to the destination...
+[16:14:44] Finished: bronze.backfield_athlete_records:athlete_id:not_null (204ms)
+[16:14:44] Finished: bronze.live_assessments:evaluation_id:not_null (65ms)
+[16:14:44] Running:  silver.live_assessments
+[16:14:44] Finished: bronze.backfield_athlete_records:is_synthetic:not_null (237ms)
+[16:14:44] [bronze.provider_status] Successfully collected the data from the asset, uploading to the destination...
+[16:14:44] [bronze.cfbd_player_season_passing] Successfully loaded the data from the asset into the destination.
+[16:14:44] Finished: bronze.cfbd_player_season_passing (2.947s)
+[16:14:44] Running:  bronze.cfbd_player_season_passing:provider_status:accepted_values
+[16:14:44] [bronze.nfl_players] Successfully collected the data from the asset, uploading to the destination...
+[16:14:45] [bronze.nfl_combine] Successfully loaded the data from the asset into the destination.
+[16:14:45] Finished: bronze.nfl_combine (3.138s)
+[16:14:45] Running:  bronze.nfl_combine:pos:not_null
+[16:14:45] Running:  bronze.nfl_combine:season:not_null
+[16:14:45] Running:  bronze.nfl_combine:player_name:not_null
+[16:14:45] [bronze.provider_status] Successfully loaded the data from the asset into the destination.
+[16:14:45] Finished: bronze.provider_status (3.279s)
+[16:14:45] Running:  bronze.provider_status:provider:not_null
+[16:14:45] Running:  bronze.provider_status:status:accepted_values
+[16:14:45] Running:  bronze.provider_status:provider:unique
+[16:14:45] Finished: silver.live_assessments (541ms)
+[16:14:45] Running:  silver.live_assessments:evaluation_id:not_null
+[16:14:45] Running:  silver.live_assessments:evaluation_id:unique
+[16:14:45] [bronze.nfl_players] Successfully loaded the data from the asset into the destination.
+[16:14:45] Finished: bronze.nfl_players (3.542s)
+[16:14:45] Running:  silver.live_assessments:metric:accepted_values
+[16:14:45] Finished: bronze.cfbd_player_season_passing:provider_status:accepted_values (609ms)
+[16:14:45] Running:  silver.live_assessments:unit:accepted_values
+[16:14:45] Finished: bronze.nfl_combine:pos:not_null (433ms)
+[16:14:45] Running:  silver.live_assessments:quality_status:accepted_values
+[16:14:45] Finished: bronze.nfl_combine:season:not_null (447ms)
+[16:14:45] Running:  silver.live_assessments:custom-check:valid_rows_have_positive_normalized_values
+[16:14:45] Finished: bronze.nfl_combine:player_name:not_null (461ms)
+[16:14:45] Running:  silver.live_assessments:custom-check:sprint_times_are_physically_plausible_when_valid
+[16:14:45] Finished: bronze.provider_status:provider:unique (337ms)
+[16:14:45] Running:  gold.ncaa_qb_context
+[16:14:45] Finished: bronze.provider_status:provider:not_null (351ms)
+[16:14:45] Running:  silver.athletes
+[16:14:45] Finished: bronze.provider_status:status:accepted_values (366ms)
+[16:14:45] Finished: silver.live_assessments:evaluation_id:not_null (350ms)
+[16:14:45] Finished: silver.live_assessments:evaluation_id:unique (366ms)
+[16:14:45] Finished: silver.live_assessments:metric:accepted_values (148ms)
+[16:14:45] Finished: silver.live_assessments:unit:accepted_values (148ms)
+[16:14:45] Finished: silver.live_assessments:quality_status:accepted_values (147ms)
+[16:14:45] Finished: silver.live_assessments:custom-check:valid_rows_have_positive_normalized_values (147ms)
+[16:14:45] Finished: silver.live_assessments:custom-check:sprint_times_are_physically_plausible_when_valid (149ms)
+[16:14:45] Finished: gold.ncaa_qb_context (166ms)
+[16:14:45] Running:  gold.ncaa_qb_context:provider_status:not_null
+[16:14:45] Finished: silver.athletes (205ms)
+[16:14:45] Running:  silver.athletes:custom-check:no_athlete_appears_under_two_different_pfr_ids_in_one_season
+[16:14:45] Running:  silver.athletes:athlete_key:unique
+[16:14:45] Running:  silver.athletes:athlete_key:not_null
+[16:14:45] Running:  silver.athletes:identity_match_type:accepted_values
+[16:14:45] Finished: gold.ncaa_qb_context:provider_status:not_null (67ms)
+[16:14:45] Finished: silver.athletes:athlete_key:not_null (28ms)
+[16:14:45] Finished: silver.athletes:athlete_key:unique (43ms)
+[16:14:45] Finished: silver.athletes:identity_match_type:accepted_values (58ms)
+[16:14:45] Finished: silver.athletes:custom-check:no_athlete_appears_under_two_different_pfr_ids_in_one_season (76ms)
+[16:14:45] Running:  silver.physical_measurements
+[16:14:45] Finished: silver.physical_measurements (136ms)
+[16:14:45] Running:  silver.physical_measurements:custom-check:one_value_per_athlete,_metric_and_season
+[16:14:45] Running:  silver.physical_measurements:value:not_null
+[16:14:45] Running:  silver.physical_measurements:athlete_key:not_null
+[16:14:45] Running:  silver.physical_measurements:metric:accepted_values
+[16:14:45] Running:  silver.physical_measurements:unit:accepted_values
+[16:14:45] Running:  silver.physical_measurements:value:positive
+[16:14:45] Running:  silver.physical_measurements:source_record_id:not_null
+[16:14:45] Finished: silver.physical_measurements:value:not_null (14ms)
+[16:14:45] Finished: silver.physical_measurements:value:positive (29ms)
+[16:14:46] Finished: silver.physical_measurements:athlete_key:not_null (43ms)
+[16:14:46] Finished: silver.physical_measurements:metric:accepted_values (59ms)
+[16:14:46] Finished: silver.physical_measurements:source_record_id:not_null (74ms)
+[16:14:46] Finished: silver.physical_measurements:unit:accepted_values (89ms)
+[16:14:46] Finished: silver.physical_measurements:custom-check:one_value_per_athlete,_metric_and_season (109ms)
+[16:14:46] Running:  gold.live_reference_values
+[16:14:46] Running:  gold.combine_benchmarks
+[16:14:46] Finished: gold.live_reference_values (44ms)
+[16:14:46] Running:  gold.live_reference_values:value:positive
+[16:14:46] Finished: gold.combine_benchmarks (77ms)
+[16:14:46] Running:  gold.combine_benchmarks:custom-check:qb_benchmark_cohort_exists_for_40-yard_dash
+[16:14:46] Running:  gold.combine_benchmarks:metric:not_null
+[16:14:46] Running:  gold.combine_benchmarks:n:positive
+[16:14:46] Running:  gold.combine_benchmarks:custom-check:percentiles_are_ordered
+[16:14:46] Running:  gold.combine_benchmarks:position_group:not_null
+[16:14:46] Finished: gold.live_reference_values:value:positive (46ms)
+[16:14:46] Finished: gold.combine_benchmarks:position_group:not_null (28ms)
+[16:14:46] Finished: gold.combine_benchmarks:metric:not_null (43ms)
+[16:14:46] Finished: gold.combine_benchmarks:n:positive (63ms)
+[16:14:46] Finished: gold.combine_benchmarks:custom-check:qb_benchmark_cohort_exists_for_40-yard_dash (79ms)
+[16:14:46] Finished: gold.combine_benchmarks:custom-check:percentiles_are_ordered (93ms)
+[16:14:46] Running:  gold.live_reference_catalog
+[16:14:46] Running:  gold.athlete_benchmark_results
+[16:14:46] Running:  gold.athlete_evidence
+[16:14:46] Finished: gold.live_reference_catalog (25ms)
+[16:14:46] Running:  gold.live_reference_catalog:custom-check:available_references_have_a_cohort_of_at_least_20
+[16:14:46] Running:  gold.live_reference_catalog:metric:not_null
+[16:14:46] Running:  gold.live_reference_catalog:custom-check:10-yard_split_is_never_marked_available
+[16:14:46] Finished: gold.athlete_evidence (54ms)
+[16:14:46] Running:  gold.athlete_evidence:percentile:max
+[16:14:46] Running:  gold.athlete_evidence:comparability:accepted_values
+[16:14:46] Running:  gold.athlete_evidence:percentile:min
+[16:14:46] Running:  gold.athlete_evidence:athlete_id:not_null
+[16:14:46] Finished: gold.live_reference_catalog:custom-check:10-yard_split_is_never_marked_available (44ms)
+[16:14:46] Finished: gold.athlete_evidence:comparability:accepted_values (30ms)
+[16:14:46] Finished: gold.live_reference_catalog:metric:not_null (75ms)
+[16:14:46] [bronze.nfl_player_stats] Successfully collected the data from the asset, uploading to the destination...
+[16:14:46] Finished: gold.athlete_evidence:percentile:max (60ms)
+[16:14:46] Finished: gold.live_reference_catalog:custom-check:available_references_have_a_cohort_of_at_least_20 (104ms)
+[16:14:46] Running:  gold.live_assessment_comparisons
+[16:14:46] Finished: gold.athlete_benchmark_results (167ms)
+[16:14:46] Running:  gold.athlete_benchmark_results:custom-check:percentile_present_exactly_when_status_is_calculated
+[16:14:46] Running:  gold.athlete_benchmark_results:metric:not_null
+[16:14:46] Running:  gold.athlete_benchmark_results:athlete_id:not_null
+[16:14:46] Running:  gold.athlete_benchmark_results:percentile_status:accepted_values
+[16:14:46] Running:  gold.athlete_benchmark_results:unit:not_null
+[16:14:46] Running:  gold.athlete_benchmark_results:percentile:min
+[16:14:46] Running:  gold.athlete_benchmark_results:percentile:max
+[16:14:46] Finished: gold.live_assessment_comparisons (64ms)
+[16:14:46] Running:  gold.athlete_benchmark_results:custom-check:every_measured_value_carries_a_source_record_and_capture_method
+[16:14:46] Finished: gold.athlete_evidence:percentile:min (153ms)
+[16:14:46] Running:  gold.athlete_benchmark_results:custom-check:one_row_per_athlete_and_metric
+[16:14:46] Finished: gold.athlete_evidence:athlete_id:not_null (167ms)
+[16:14:46] Running:  gold.athlete_benchmark_results:custom-check:calculated_percentiles_always_have_a_cohort_of_at_least_20
+[16:14:46] [bronze.nfl_player_stats] Successfully loaded the data from the asset into the destination.
+[16:14:46] Finished: bronze.nfl_player_stats (4.894s)
+[16:14:46] Running:  gold.live_assessment_comparisons:status:accepted_values
+[16:14:46] Finished: gold.athlete_benchmark_results:custom-check:percentile_present_exactly_when_status_is_calculated (410ms)
+[16:14:46] Running:  gold.live_assessment_comparisons:percentile:min
+[16:14:46] Finished: gold.athlete_benchmark_results:percentile:max (425ms)
+[16:14:46] Running:  gold.live_assessment_comparisons:percentile:max
+[16:14:46] Finished: gold.athlete_benchmark_results:percentile:min (439ms)
+[16:14:46] Running:  gold.live_assessment_comparisons:custom-check:percentile_only_for_verified_electronic_measurements
+[16:14:46] Finished: gold.athlete_benchmark_results:percentile_status:accepted_values (454ms)
+[16:14:46] Running:  gold.live_assessment_comparisons:custom-check:10-yard_results_are_never_given_a_percentile_or_band
+[16:14:46] Finished: gold.athlete_benchmark_results:metric:not_null (468ms)
+[16:14:46] Running:  bronze.nfl_player_stats:player_id:not_null
+[16:14:46] Finished: gold.athlete_benchmark_results:unit:not_null (482ms)
+[16:14:46] Running:  bronze.nfl_player_stats:season:not_null
+[16:14:46] Finished: gold.athlete_benchmark_results:athlete_id:not_null (497ms)
+[16:14:46] Finished: bronze.nfl_player_stats:season:not_null (29ms)
+[16:14:46] Running:  silver.nfl_qb_season_stats
+[16:14:46] Finished: gold.athlete_benchmark_results:custom-check:one_row_per_athlete_and_metric (486ms)
+[16:14:46] Finished: silver.nfl_qb_season_stats (45ms)
+[16:14:46] Running:  silver.nfl_qb_season_stats:custom-check:completions_never_exceed_attempts
+[16:14:46] Running:  silver.nfl_qb_season_stats:player_id:not_null
+[16:14:46] Running:  silver.nfl_qb_season_stats:attempts:non_negative
+[16:14:46] Finished: gold.athlete_benchmark_results:custom-check:calculated_percentiles_always_have_a_cohort_of_at_least_20 (517ms)
+[16:14:46] Running:  silver.nfl_qb_season_stats:custom-check:unique_qb-season
+[16:14:46] Finished: gold.live_assessment_comparisons:status:accepted_values (189ms)
+[16:14:47] Finished: gold.live_assessment_comparisons:percentile:min (190ms)
+[16:14:47] Finished: gold.live_assessment_comparisons:percentile:max (189ms)
+[16:14:47] Finished: gold.live_assessment_comparisons:custom-check:percentile_only_for_verified_electronic_measurements (192ms)
+[16:14:47] Finished: gold.live_assessment_comparisons:custom-check:10-yard_results_are_never_given_a_percentile_or_band (191ms)
+[16:14:47] Failed: bronze.nfl_player_stats:player_id:not_null (192ms)
+[16:14:47] Finished: gold.athlete_benchmark_results:custom-check:every_measured_value_carries_a_source_record_and_capture_method (649ms)
+[16:14:47] Finished: silver.nfl_qb_season_stats:player_id:not_null (132ms)
+[16:14:47] Finished: silver.nfl_qb_season_stats:attempts:non_negative (146ms)
+[16:14:47] Finished: silver.nfl_qb_season_stats:custom-check:completions_never_exceed_attempts (160ms)
+[16:14:47] Finished: silver.nfl_qb_season_stats:custom-check:unique_qb-season (160ms)
+[16:14:47] Running:  gold.qb_physical_comparables
+[16:14:47] Finished: gold.qb_physical_comparables (26ms)
+[16:14:47] Running:  gold.qb_physical_comparables:rank:positive
+[16:14:47] Finished: gold.qb_physical_comparables:rank:positive (13ms)
+[16:14:49] [bronze.pff_ncaa_rosters] Successfully collected the data from the asset, uploading to the destination...
+[16:14:49] [bronze.pff_ncaa_rosters] Successfully loaded the data from the asset into the destination.
+[16:14:49] Finished: bronze.pff_ncaa_rosters (8.051s)
+[16:14:49] Running:  bronze.pff_ncaa_rosters:_source_provider:accepted_values
+[16:14:49] Finished: bronze.pff_ncaa_rosters:_source_provider:accepted_values (14ms)
+[16:14:51] [bronze.pff_rushing_summary] Successfully collected the data from the asset, uploading to the destination...
+[16:14:51] [bronze.pff_rushing_summary] Successfully loaded the data from the asset into the destination.
+[16:14:51] Finished: bronze.pff_rushing_summary (9.913s)
+[16:14:51] Running:  bronze.pff_rushing_summary:_source_provider:accepted_values
+[16:14:51] Finished: bronze.pff_rushing_summary:_source_provider:accepted_values (15ms)
+[16:14:52] [bronze.pff_passing_summary] Successfully collected the data from the asset, uploading to the destination...
+[16:14:52] [bronze.pff_passing_summary] Successfully loaded the data from the asset into the destination.
+[16:14:52] Finished: bronze.pff_passing_summary (10.509s)
+[16:14:52] Running:  bronze.pff_passing_summary:_source_provider:accepted_values
+[16:14:52] Finished: bronze.pff_passing_summary:_source_provider:accepted_values (15ms)
+[16:14:54] [bronze.pff_receiving_summary] Successfully collected the data from the asset, uploading to the destination...
+[16:14:54] [bronze.pff_receiving_summary] Successfully loaded the data from the asset into the destination.
+[16:14:54] Finished: bronze.pff_receiving_summary (12.591s)
+[16:14:54] Running:  bronze.pff_receiving_summary:_source_provider:accepted_values
+[16:14:54] Finished: bronze.pff_receiving_summary:_source_provider:accepted_values (15ms)
+[16:14:59] [bronze.pff_offense_summary] Successfully collected the data from the asset, uploading to the destination...
+[16:15:00] [bronze.pff_offense_summary] Successfully loaded the data from the asset into the destination.
+[16:15:00] Finished: bronze.pff_offense_summary (18.22s)
+[16:15:00] Running:  bronze.pff_offense_summary:_source_provider:accepted_values
+[16:15:00] Finished: bronze.pff_offense_summary:_source_provider:accepted_values (14ms)
+[16:15:00] Running:  silver.pff_player_seasons
+[16:15:00] Finished: silver.pff_player_seasons (53ms)
+[16:15:00] Running:  silver.pff_player_seasons:pff_player_id:not_null
+[16:15:00] Running:  silver.pff_player_seasons:league:accepted_values
+[16:15:00] Running:  silver.pff_player_seasons:custom-check:unique_player-league-season
+[16:15:00] Running:  silver.pff_player_seasons:season:not_null
+[16:15:00] Running:  silver.pff_player_seasons:custom-check:completions_never_exceed_attempts
+[16:15:00] Running:  silver.pff_player_seasons:custom-check:pff_grades_within_0-100
+[16:15:00] Finished: silver.pff_player_seasons:season:not_null (0s)
+[16:15:00] Finished: silver.pff_player_seasons:pff_player_id:not_null (0s)
+[16:15:00] Finished: silver.pff_player_seasons:custom-check:completions_never_exceed_attempts (0s)
+[16:15:00] Finished: silver.pff_player_seasons:league:accepted_values (0s)
+[16:15:00] Finished: silver.pff_player_seasons:custom-check:pff_grades_within_0-100 (1ms)
+[16:15:00] Finished: silver.pff_player_seasons:custom-check:unique_player-league-season (2ms)
+[16:15:00] Running:  silver.pff_grades
+[16:15:00] Running:  silver.athlete_identity_xref
+[16:15:00] Finished: silver.athlete_identity_xref (19ms)
+[16:15:00] Running:  silver.athlete_identity_xref:custom-check:no_gsis_id_linked_to_two_pff_players
+[16:15:00] Running:  silver.athlete_identity_xref:pff_player_id:unique
+[16:15:00] Running:  silver.athlete_identity_xref:match_type:accepted_values
+[16:15:00] Running:  silver.athlete_identity_xref:pff_player_id:not_null
+[16:15:00] Finished: silver.athlete_identity_xref:pff_player_id:not_null (0s)
+[16:15:00] Finished: silver.athlete_identity_xref:match_type:accepted_values (0s)
+[16:15:00] Finished: silver.athlete_identity_xref:custom-check:no_gsis_id_linked_to_two_pff_players (1ms)
+[16:15:00] Finished: silver.athlete_identity_xref:pff_player_id:unique (1ms)
+[16:15:00] Running:  gold.player_benchmark_results
+[16:15:00] Running:  gold.pipeline_quality
+[16:15:00] Finished: gold.pipeline_quality (4ms)
+[16:15:00] Running:  gold.pipeline_quality:dataset:unique
+[16:15:00] Finished: gold.pipeline_quality:dataset:unique (0s)
+[16:15:00] Finished: silver.pff_grades (86ms)
+[16:15:00] Running:  silver.pff_grades:grade_value:max
+[16:15:00] Running:  silver.pff_grades:grade_value:not_null
+[16:15:00] Running:  silver.pff_grades:grade_source:accepted_values
+[16:15:00] Running:  silver.pff_grades:grade_value:min
+[16:15:00] Finished: silver.pff_grades:grade_value:not_null (0s)
+[16:15:00] Finished: silver.pff_grades:grade_value:max (0s)
+[16:15:00] Finished: silver.pff_grades:grade_value:min (0s)
+[16:15:00] Finished: silver.pff_grades:grade_source:accepted_values (0s)
+[16:15:00] Running:  gold.pff_position_grade_distributions
+[16:15:00] Running:  gold.pff_player_context
+[16:15:00] Finished: gold.pff_position_grade_distributions (8ms)
+[16:15:00] Running:  gold.pff_position_grade_distributions:custom-check:percentiles_ordered
+[16:15:00] Running:  gold.pff_position_grade_distributions:n:positive
+[16:15:00] Finished: gold.pff_position_grade_distributions:n:positive (0s)
+[16:15:00] Finished: gold.pff_position_grade_distributions:custom-check:percentiles_ordered (0s)
+[16:15:00] Finished: gold.pff_player_context (70ms)
+[16:15:00] Running:  gold.pff_player_context:custom-check:unique_player-league-season
+[16:15:00] Running:  gold.pff_player_context:pff_grade_offense_pctl_in_position:min
+[16:15:00] Running:  gold.pff_player_context:pff_grade_offense_pctl_in_position:max
+[16:15:00] Running:  gold.pff_player_context:pff_player_id:not_null
+[16:15:00] Finished: gold.pff_player_context:pff_grade_offense_pctl_in_position:min (0s)
+[16:15:00] Finished: gold.pff_player_context:pff_player_id:not_null (0s)
+[16:15:00] Finished: gold.pff_player_context:pff_grade_offense_pctl_in_position:max (0s)
+[16:15:00] Finished: gold.pff_player_context:custom-check:unique_player-league-season (2ms)
+[16:15:00] Finished: gold.player_benchmark_results (196ms)
+[16:15:00] Running:  gold.player_benchmark_results:custom-check:every_player_is_linked_by_provider_id_(never_name)
+[16:15:00] Running:  gold.player_benchmark_results:custom-check:one_row_per_player_and_metric
+[16:15:00] Running:  gold.player_benchmark_results:percentile:min
+[16:15:00] Running:  gold.player_benchmark_results:athlete_id:not_null
+[16:15:00] Running:  gold.player_benchmark_results:pff_player_id:not_null
+[16:15:00] Running:  gold.player_benchmark_results:percentile_status:accepted_values
+[16:15:00] Running:  gold.player_benchmark_results:custom-check:percentile_present_exactly_when_status_is_calculated
+[16:15:00] Running:  gold.player_benchmark_results:percentile:max
+[16:15:00] Finished: gold.player_benchmark_results:athlete_id:not_null (0s)
+[16:15:00] Finished: gold.player_benchmark_results:percentile:max (0s)
+[16:15:00] Finished: gold.player_benchmark_results:custom-check:percentile_present_exactly_when_status_is_calculated (0s)
+[16:15:00] Finished: gold.player_benchmark_results:pff_player_id:not_null (0s)
+[16:15:00] Finished: gold.player_benchmark_results:percentile_status:accepted_values (0s)
+[16:15:00] Finished: gold.player_benchmark_results:percentile:min (0s)
+[16:15:00] Finished: gold.player_benchmark_results:custom-check:one_row_per_player_and_metric (1ms)
+[16:15:00] Finished: gold.player_benchmark_results:custom-check:every_player_is_linked_by_provider_id_(never_name) (8ms)
+[16:15:00] Running:  gold.lineage_row_counts
+[16:15:00] Finished: gold.lineage_row_counts (326ms)
+[16:15:00] Running:  gold.lineage_row_counts:row_count:non_negative
+[16:15:00] Running:  gold.lineage_row_counts:asset:not_null
+[16:15:00] Running:  gold.lineage_row_counts:asset:unique
+[16:15:00] Finished: gold.lineage_row_counts:row_count:non_negative (0s)
+[16:15:00] Finished: gold.lineage_row_counts:asset:not_null (0s)
+[16:15:00] Finished: gold.lineage_row_counts:asset:unique (0s)
+
+==================================================
+
+PASS bronze.backfield_athlete_records ...
+PASS bronze.live_assessments ..
+PASS bronze.cfbd_player_season_passing .
+PASS bronze.nfl_combine ...
+PASS bronze.provider_status ...
+PASS silver.live_assessments .......
+PASS bronze.nfl_players 
+PASS gold.ncaa_qb_context .
+PASS silver.athletes ....
+PASS silver.physical_measurements .......
+PASS gold.live_reference_values .
+PASS gold.combine_benchmarks .....
+PASS gold.live_reference_catalog ...
+PASS gold.athlete_evidence ....
+PASS gold.athlete_benchmark_results ..........
+PASS gold.live_assessment_comparisons .....
+PASS bronze.nfl_player_stats .F
+PASS silver.nfl_qb_season_stats ....
+PASS gold.qb_physical_comparables .
+PASS bronze.pff_ncaa_rosters .
+PASS bronze.pff_rushing_summary .
+PASS bronze.pff_passing_summary .
+PASS bronze.pff_receiving_summary .
+PASS bronze.pff_offense_summary .
+PASS silver.pff_player_seasons ......
+PASS silver.athlete_identity_xref ....
+PASS gold.pipeline_quality .
+PASS silver.pff_grades ....
+PASS gold.pff_position_grade_distributions ..
+PASS gold.pff_player_context ....
+PASS gold.player_benchmark_results ........
+PASS gold.lineage_row_counts ...
+
+
+bruin run completed with failures in 18.846s
+
+ ✗ Assets executed      1 failed due to checks / 31 succeeded
+ ✗ Quality checks       1 failed / 102 succeeded
+
+
+1 assets failed
+└── bronze.nfl_player_stats
+    └── player_id.not_null - column 'player_id' has 130 null values
+

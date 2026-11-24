@@ -2,6 +2,7 @@ flowchart LR
   subgraph BRONZE
     bronze_backfield_athlete_records["bronze.backfield_athlete_records"]
     bronze_cfbd_player_season_passing["bronze.cfbd_player_season_passing"]
+    bronze_live_assessments["bronze.live_assessments"]
     bronze_nfl_combine["bronze.nfl_combine"]
     bronze_nfl_player_stats["bronze.nfl_player_stats"]
     bronze_nfl_players["bronze.nfl_players"]
@@ -15,6 +16,7 @@ flowchart LR
   subgraph SILVER
     silver_athlete_identity_xref["silver.athlete_identity_xref"]
     silver_athletes["silver.athletes"]
+    silver_live_assessments["silver.live_assessments"]
     silver_nfl_qb_season_stats["silver.nfl_qb_season_stats"]
     silver_pff_grades["silver.pff_grades"]
     silver_pff_player_seasons["silver.pff_player_seasons"]
@@ -25,6 +27,9 @@ flowchart LR
     gold_athlete_evidence["gold.athlete_evidence"]
     gold_combine_benchmarks["gold.combine_benchmarks"]
     gold_lineage_row_counts["gold.lineage_row_counts"]
+    gold_live_assessment_comparisons["gold.live_assessment_comparisons"]
+    gold_live_reference_catalog["gold.live_reference_catalog"]
+    gold_live_reference_values["gold.live_reference_values"]
     gold_ncaa_qb_context["gold.ncaa_qb_context"]
     gold_pff_player_context["gold.pff_player_context"]
     gold_pff_position_grade_distributions["gold.pff_position_grade_distributions"]
@@ -43,6 +48,7 @@ flowchart LR
   bronze_pff_rushing_summary --> silver_pff_player_seasons
   bronze_pff_receiving_summary --> silver_pff_player_seasons
   bronze_pff_offense_summary --> silver_pff_player_seasons
+  bronze_live_assessments --> silver_live_assessments
   silver_athletes --> silver_physical_measurements
   bronze_nfl_combine --> silver_physical_measurements
   bronze_nfl_combine --> gold_pipeline_quality
@@ -65,7 +71,10 @@ flowchart LR
   silver_athletes --> gold_player_benchmark_results
   silver_physical_measurements --> gold_player_benchmark_results
   gold_combine_benchmarks --> gold_player_benchmark_results
+  gold_combine_benchmarks --> gold_live_reference_catalog
   bronze_cfbd_player_season_passing --> gold_ncaa_qb_context
+  silver_physical_measurements --> gold_live_reference_values
+  silver_athletes --> gold_live_reference_values
   gold_athlete_evidence --> gold_qb_physical_comparables
   gold_combine_benchmarks --> gold_qb_physical_comparables
   silver_physical_measurements --> gold_qb_physical_comparables
@@ -78,6 +87,9 @@ flowchart LR
   silver_physical_measurements --> gold_athlete_evidence
   silver_athletes --> gold_athlete_evidence
   gold_combine_benchmarks --> gold_athlete_evidence
+  silver_live_assessments --> gold_live_assessment_comparisons
+  gold_live_reference_catalog --> gold_live_assessment_comparisons
+  gold_live_reference_values --> gold_live_assessment_comparisons
   silver_pff_grades --> gold_pff_position_grade_distributions
   bronze_backfield_athlete_records --> gold_athlete_benchmark_results
   silver_physical_measurements --> gold_athlete_benchmark_results

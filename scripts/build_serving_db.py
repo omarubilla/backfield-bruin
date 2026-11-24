@@ -13,6 +13,7 @@ TABLES = [
     "gold.athlete_benchmark_results", "gold.combine_benchmarks", "bronze.provider_status",
     "gold.pff_position_grade_distributions", "gold.pff_player_context",
     "gold.player_benchmark_results", "gold.lineage_row_counts", "gold.pipeline_quality",
+    "gold.live_reference_catalog", "gold.live_reference_values",
 ]
 
 if os.path.exists(DST):

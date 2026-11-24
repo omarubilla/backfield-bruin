@@ -1,0 +1,19 @@
+{
+  "note": "CLEARLY LABELLED SAMPLE ATHLETE for the end-to-end test. Values are fictional; isSample = true. Not a real person.",
+  "assessments": [
+    {"evaluationId": "sample-live-combine-001", "athleteId": "SAMPLE-athlete-001", "sport": "football", "position": "QB",
+     "drill": "10_yard_dash", "capturedAt": "2026-11-23T22:00:00Z", "isSample": true,
+     "measurement": {"value": 1.71, "unit": "seconds", "method": "arkit_assisted", "calibrationStatus": "calibrated", "qualityStatus": "unverified",
+                     "appConfidence": {"score": 0.86, "label": "High", "reasons": []}},
+     "videoAssetId": "sample-video-001", "modalJobId": null, "glbAssetId": null},
+    {"evaluationId": "sample-live-combine-002", "athleteId": "SAMPLE-athlete-001", "sport": "football", "position": "QB",
+     "drill": "40_yard_dash", "capturedAt": "2026-11-23T22:05:00Z", "isSample": true,
+     "measurement": {"value": 4.95, "unit": "seconds", "method": "arkit_assisted", "calibrationStatus": "calibrated", "qualityStatus": "unverified",
+                     "appConfidence": {"score": 0.62, "label": "Medium", "reasons": ["Runner is small in frame (40 yards from one camera)"]}},
+     "videoAssetId": "sample-video-002", "modalJobId": "sample-modal-job-002", "glbAssetId": "sample-glb-002"},
+    {"evaluationId": "sample-live-combine-003", "athleteId": "SAMPLE-athlete-001", "sport": "football", "position": "QB",
+     "drill": "40_yard_dash", "capturedAt": "2026-11-23T22:30:00Z", "isSample": true,
+     "measurement": {"value": 4.88, "unit": "seconds", "method": "electronic_laser", "calibrationStatus": "calibrated", "qualityStatus": "verified"},
+     "videoAssetId": null, "modalJobId": null, "glbAssetId": null}
+  ]
+}

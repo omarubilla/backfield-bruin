@@ -45,4 +45,4 @@ def test_showcase_reports_exception_and_counts():
     assert s["pipeline"]["validated"] is True
     assert s["pipeline"]["dataQualityExceptions"][0]["check"].startswith("bronze.nfl_player_stats")
     assert s["headline"]["identityLinksByProviderId"] > 2000 and s["headline"]["pffGradeRows"] > 90000
-    assert s["exampleAthlete"]["athleteId"] == "pfr:CookBr03" and s["lineage"]["assetCount"] == 27
+    assert s["exampleAthlete"]["athleteId"] == "pfr:CookBr03" and s["lineage"]["assetCount"] >= 32

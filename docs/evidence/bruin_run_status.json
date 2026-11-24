@@ -2,13 +2,13 @@
   "pipeline": "backfield_scouting_combine",
   "tool": "bruin",
   "bruin_version": "Current: v0.11.832 (3590ddcdf90425e609ceb8e0e2c352fb4de995b6)",
-  "started_at": "2026-11-23T23:24:10Z",
-  "finished_at": "2026-11-23T23:25:40Z",
+  "started_at": "2026-11-24T00:14:41Z",
+  "finished_at": "2026-11-24T00:15:00Z",
   "exit_code": 1,
-  "git_commit": "49445f9",
-  "assets_total": 27,
-  "assets_passed": 27,
-  "checks_passed": 84,
+  "git_commit": "8349e7d",
+  "assets_total": 32,
+  "assets_passed": 32,
+  "checks_passed": 102,
   "checks_failed": 1,
   "checks_failed_blocking": 0,
   "check_failures": [
@@ -20,6 +20,24 @@
   ],
   "assets": [
     {
+      "asset": "bronze.backfield_athlete_records",
+      "status": "passed",
+      "checks": {
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.live_assessments",
+      "status": "passed",
+      "checks": {
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
       "asset": "bronze.cfbd_player_season_passing",
       "status": "passed",
       "checks": {
@@ -29,7 +47,7 @@
       }
     },
     {
-      "asset": "bronze.backfield_athlete_records",
+      "asset": "bronze.nfl_combine",
       "status": "passed",
       "checks": {
         "passed": 3,
@@ -47,10 +65,10 @@
       }
     },
     {
-      "asset": "bronze.nfl_combine",
+      "asset": "silver.live_assessments",
       "status": "passed",
       "checks": {
-        "passed": 3,
+        "passed": 7,
         "failed": 0,
         "skipped": 0
       }
@@ -61,15 +79,6 @@
       "checks": {
         "passed": 0,
         "failed": 0,
-        "skipped": 0
-      }
-    },
-    {
-      "asset": "bronze.nfl_player_stats",
-      "status": "passed",
-      "checks": {
-        "passed": 1,
-        "failed": 1,
         "skipped": 0
       }
     },
@@ -92,15 +101,6 @@
       }
     },
     {
-      "asset": "silver.nfl_qb_season_stats",
-      "status": "passed",
-      "checks": {
-        "passed": 4,
-        "failed": 0,
-        "skipped": 0
-      }
-    },
-    {
       "asset": "silver.physical_measurements",
       "status": "passed",
       "checks": {
@@ -110,10 +110,28 @@
       }
     },
     {
+      "asset": "gold.live_reference_values",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
       "asset": "gold.combine_benchmarks",
       "status": "passed",
       "checks": {
         "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "gold.live_reference_catalog",
+      "status": "passed",
+      "checks": {
+        "passed": 3,
         "failed": 0,
         "skipped": 0
       }
@@ -137,6 +155,33 @@
       }
     },
     {
+      "asset": "gold.live_assessment_comparisons",
+      "status": "passed",
+      "checks": {
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.nfl_player_stats",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 1,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "silver.nfl_qb_season_stats",
+      "status": "passed",
+      "checks": {
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
       "asset": "gold.qb_physical_comparables",
       "status": "passed",
       "checks": {
@@ -155,24 +200,6 @@
       }
     },
     {
-      "asset": "bronze.pff_passing_summary",
-      "status": "passed",
-      "checks": {
-        "passed": 1,
-        "failed": 0,
-        "skipped": 0
-      }
-    },
-    {
-      "asset": "bronze.pff_offense_summary",
-      "status": "passed",
-      "checks": {
-        "passed": 1,
-        "failed": 0,
-        "skipped": 0
-      }
-    },
-    {
       "asset": "bronze.pff_rushing_summary",
       "status": "passed",
       "checks": {
@@ -182,7 +209,25 @@
       }
     },
     {
+      "asset": "bronze.pff_passing_summary",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
       "asset": "bronze.pff_receiving_summary",
+      "status": "passed",
+      "checks": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "asset": "bronze.pff_offense_summary",
       "status": "passed",
       "checks": {
         "passed": 1,

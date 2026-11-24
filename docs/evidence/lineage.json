@@ -36,6 +36,12 @@
       "depends": [],
       "file": "pipeline/assets/bronze/provider_status.py"
     },
+    "bronze.live_assessments": {
+      "type": "python",
+      "layer": "bronze",
+      "depends": [],
+      "file": "pipeline/assets/bronze/live_assessments.py"
+    },
     "bronze.nfl_combine": {
       "type": "python",
       "layer": "bronze",
@@ -112,6 +118,14 @@
       ],
       "file": "pipeline/assets/silver/pff_player_seasons.sql"
     },
+    "silver.live_assessments": {
+      "type": "duckdb.sql",
+      "layer": "silver",
+      "depends": [
+        "bronze.live_assessments"
+      ],
+      "file": "pipeline/assets/silver/live_assessments.sql"
+    },
     "silver.physical_measurements": {
       "type": "duckdb.sql",
       "layer": "silver",
@@ -162,6 +176,14 @@
       ],
       "file": "pipeline/assets/gold/player_benchmark_results.sql"
     },
+    "gold.live_reference_catalog": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "gold.combine_benchmarks"
+      ],
+      "file": "pipeline/assets/gold/live_reference_catalog.sql"
+    },
     "gold.ncaa_qb_context": {
       "type": "duckdb.sql",
       "layer": "gold",
@@ -169,6 +191,15 @@
         "bronze.cfbd_player_season_passing"
       ],
       "file": "pipeline/assets/gold/ncaa_context.sql"
+    },
+    "gold.live_reference_values": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "silver.physical_measurements",
+        "silver.athletes"
+      ],
+      "file": "pipeline/assets/gold/live_reference_values.sql"
     },
     "gold.qb_physical_comparables": {
       "type": "duckdb.sql",
@@ -202,6 +233,16 @@
         "gold.combine_benchmarks"
       ],
       "file": "pipeline/assets/gold/athlete_evidence.sql"
+    },
+    "gold.live_assessment_comparisons": {
+      "type": "duckdb.sql",
+      "layer": "gold",
+      "depends": [
+        "silver.live_assessments",
+        "gold.live_reference_catalog",
+        "gold.live_reference_values"
+      ],
+      "file": "pipeline/assets/gold/live_assessment_comparisons.sql"
     },
     "gold.pff_position_grade_distributions": {
       "type": "duckdb.sql",
@@ -239,7 +280,11 @@
         "gold.pff_position_grade_distributions",
         "gold.pff_player_context",
         "gold.qb_physical_comparables",
-        "gold.ncaa_qb_context"
+        "gold.ncaa_qb_context",
+        "bronze.live_assessments",
+        "silver.live_assessments",
+        "gold.live_reference_catalog",
+        "gold.live_assessment_comparisons"
       ],
       "file": "pipeline/assets/gold/lineage_row_counts.sql"
     },
@@ -299,6 +344,10 @@
     {
       "from": "bronze.pff_offense_summary",
       "to": "silver.pff_player_seasons"
+    },
+    {
+      "from": "bronze.live_assessments",
+      "to": "silver.live_assessments"
     },
     {
       "from": "silver.athletes",
@@ -389,8 +438,20 @@
       "to": "gold.player_benchmark_results"
     },
     {
+      "from": "gold.combine_benchmarks",
+      "to": "gold.live_reference_catalog"
+    },
+    {
       "from": "bronze.cfbd_player_season_passing",
       "to": "gold.ncaa_qb_context"
+    },
+    {
+      "from": "silver.physical_measurements",
+      "to": "gold.live_reference_values"
+    },
+    {
+      "from": "silver.athletes",
+      "to": "gold.live_reference_values"
     },
     {
       "from": "gold.athlete_evidence",
@@ -439,6 +500,18 @@
     {
       "from": "gold.combine_benchmarks",
       "to": "gold.athlete_evidence"
+    },
+    {
+      "from": "silver.live_assessments",
+      "to": "gold.live_assessment_comparisons"
+    },
+    {
+      "from": "gold.live_reference_catalog",
+      "to": "gold.live_assessment_comparisons"
+    },
+    {
+      "from": "gold.live_reference_values",
+      "to": "gold.live_assessment_comparisons"
     },
     {
       "from": "silver.pff_grades",
@@ -542,6 +615,22 @@
     },
     {
       "from": "gold.ncaa_qb_context",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "bronze.live_assessments",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "silver.live_assessments",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.live_reference_catalog",
+      "to": "gold.lineage_row_counts"
+    },
+    {
+      "from": "gold.live_assessment_comparisons",
       "to": "gold.lineage_row_counts"
     },
     {

@@ -1,0 +1,429 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://backfield.ai/schemas/live_assessment/1.0.0",
+  "title": "Backfield live athlete combine assessment (input + evaluation)",
+  "$defs": {
+    "input": {
+      "type": "object",
+      "required": [
+        "evaluationId",
+        "athleteId",
+        "position",
+        "drill",
+        "measurement"
+      ],
+      "properties": {
+        "evaluationId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 80
+        },
+        "athleteId": {
+          "type": "string",
+          "description": "forced to the Firebase uid when submitted with a Firebase ID token"
+        },
+        "sport": {
+          "const": "football"
+        },
+        "position": {
+          "type": "string"
+        },
+        "drill": {
+          "enum": [
+            "10_yard_dash",
+            "40_yard_dash",
+            "20_yard_shuttle",
+            "three_cone",
+            "vertical_jump",
+            "broad_jump"
+          ]
+        },
+        "measurement": {
+          "type": "object",
+          "required": [
+            "value",
+            "unit",
+            "method",
+            "calibrationStatus",
+            "qualityStatus"
+          ],
+          "properties": {
+            "value": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "unit": {
+              "enum": [
+                "seconds",
+                "second",
+                "sec",
+                "s",
+                "milliseconds",
+                "ms",
+                "inches",
+                "in",
+                "cm",
+                "centimeters"
+              ]
+            },
+            "method": {
+              "enum": [
+                "arkit_assisted",
+                "video_timed",
+                "hand_timed",
+                "self_reported",
+                "electronic_laser",
+                "electronic_timing",
+                "freelap",
+                "laser"
+              ]
+            },
+            "calibrationStatus": {
+              "enum": [
+                "calibrated",
+                "uncalibrated",
+                "pending"
+              ]
+            },
+            "qualityStatus": {
+              "enum": [
+                "verified",
+                "unverified",
+                "failed"
+              ]
+            },
+            "appConfidence": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          }
+        },
+        "capturedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "videoAssetId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "modalJobId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "glbAssetId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "motionObservations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {},
+              "unit": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "source": {
+                "type": "string"
+              },
+              "validated": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "isSample": {
+          "type": "boolean"
+        }
+      }
+    },
+    "comparison": {
+      "type": "object",
+      "required": [
+        "metric",
+        "drill",
+        "value",
+        "unit",
+        "method",
+        "status",
+        "percentile",
+        "descriptiveBand",
+        "reference",
+        "reason",
+        "caveats"
+      ],
+      "properties": {
+        "metric": {
+          "type": "string"
+        },
+        "drill": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "enum": [
+            "s",
+            "in"
+          ]
+        },
+        "method": {
+          "type": "string"
+        },
+        "calibrationStatus": {
+          "type": "string"
+        },
+        "qualityStatus": {
+          "type": "string"
+        },
+        "appConfidence": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "verified",
+            "provisional",
+            "unavailable",
+            "rejected"
+          ]
+        },
+        "percentile": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "descriptiveBand": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "interval",
+            "interpretation"
+          ],
+          "properties": {
+            "interval": {
+              "enum": [
+                "below p10",
+                "p10-p25",
+                "p25-p50",
+                "p50-p75",
+                "p75-p90",
+                "above p90"
+              ]
+            },
+            "interpretation": {
+              "type": "string"
+            }
+          }
+        },
+        "reference": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "required": [
+            "population",
+            "positionGroup",
+            "sampleSize",
+            "seasons",
+            "timingMethod",
+            "source",
+            "sourceRef",
+            "distribution",
+            "label"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "caveats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "verified"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "percentile": {
+                "type": "number"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "percentile": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "unavailable"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "reference": {
+                "type": "null"
+              },
+              "descriptiveBand": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "evaluation": {
+      "type": "object",
+      "required": [
+        "schemaVersion",
+        "assessmentId",
+        "evaluationId",
+        "athlete",
+        "capture",
+        "assets",
+        "comparison",
+        "motionObservations",
+        "agentViews",
+        "methodology",
+        "sources",
+        "pipeline"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "assessmentId": {
+          "type": "string",
+          "pattern": "^la-[0-9a-f]{16}$"
+        },
+        "evaluationId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "athlete": {
+          "type": "object",
+          "required": [
+            "athleteId",
+            "position",
+            "sport",
+            "isSample"
+          ]
+        },
+        "capture": {
+          "type": "object"
+        },
+        "assets": {
+          "type": "object",
+          "required": [
+            "videoAssetId",
+            "modalJobId",
+            "glbAssetId",
+            "storage"
+          ]
+        },
+        "comparison": {
+          "$ref": "#/$defs/comparison"
+        },
+        "motionObservations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "basis",
+              "validated",
+              "comparable_to_reference"
+            ],
+            "properties": {
+              "basis": {
+                "const": "model_estimated"
+              },
+              "comparable_to_reference": {
+                "const": false
+              }
+            }
+          }
+        },
+        "agentViews": {
+          "type": "object",
+          "required": [
+            "scout",
+            "positionCoach",
+            "filmAnalyst"
+          ]
+        },
+        "methodology": {
+          "type": "array"
+        },
+        "sources": {
+          "type": "array"
+        },
+        "pipeline": {
+          "type": "object",
+          "required": [
+            "status",
+            "validated"
+          ]
+        },
+        "redacted": {
+          "type": "boolean",
+          "description": "true on public responses: athleteId, evaluationId and asset references removed"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/evaluation"
+    }
+  ]
+}

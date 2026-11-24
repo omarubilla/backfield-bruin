@@ -25,3 +25,5 @@ web/
 scripts/run_api.sh
 exports/internal/
 data/serving.duckdb
+data/landing/
+data/test_landing/
